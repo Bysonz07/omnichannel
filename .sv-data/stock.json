@@ -1,0 +1,1586 @@
+[
+  {
+    "kode_produk": "1006-12F",
+    "nama_produk": "1006 12 INC FANTA",
+    "kategori": "SOFT12",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 3
+  },
+  {
+    "kode_produk": "1006-12M",
+    "nama_produk": "1006 12 INC MERAH",
+    "kategori": "SOFT12",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 2
+  },
+  {
+    "kode_produk": "1006-14CR",
+    "nama_produk": "1006 14 INC CREAM",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "1006-14H",
+    "nama_produk": "1006 14 INC HITAM",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 2
+  },
+  {
+    "kode_produk": "1007-13C",
+    "nama_produk": "SF MDL 1007 BHN TMF 13 INC COKLAT",
+    "kategori": "SOFT13",
+    "satuan": "-",
+    "gudang": "51b",
+    "qty": 20
+  },
+  {
+    "kode_produk": "1007-13CT",
+    "nama_produk": "SF MDL 1007 BHN TMF 13 INC COKLAT TUA",
+    "kategori": "SOFT13",
+    "satuan": "-",
+    "gudang": "51b",
+    "qty": 15
+  },
+  {
+    "kode_produk": "1007-13H",
+    "nama_produk": "SF MDL 1007 BHN TMF 13 INC HITAM",
+    "kategori": "SOFT13",
+    "satuan": "-",
+    "gudang": "51b",
+    "qty": 14
+  },
+  {
+    "kode_produk": "1007-13M-H",
+    "nama_produk": "SF MDL 1007 BHN TMF 13 INC MERAH - HITAM",
+    "kategori": "SOFT13",
+    "satuan": "-",
+    "gudang": "51b",
+    "qty": 19
+  },
+  {
+    "kode_produk": "1007-14C",
+    "nama_produk": "SF MDL 1007 BHN TMF 14 INC COKLAT",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51b",
+    "qty": 8
+  },
+  {
+    "kode_produk": "1007-14CT",
+    "nama_produk": "SF MDL 1007 BHN TMF 14 INC COKLAT TUA",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51b",
+    "qty": 8
+  },
+  {
+    "kode_produk": "1007-14H",
+    "nama_produk": "SF MDL 1007 BHN TMF 14 INC HITAM",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51b",
+    "qty": 8
+  },
+  {
+    "kode_produk": "1007-14M-H",
+    "nama_produk": "SF MDL 1007 BHN TMF 14 INC MERAH - HITAM",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51b",
+    "qty": 8
+  },
+  {
+    "kode_produk": "1008-13U",
+    "nama_produk": "SF MDL 1007 BHN LC BEAR 13 INC UNGU",
+    "kategori": "SOFT13",
+    "satuan": "-",
+    "gudang": "51b",
+    "qty": 1
+  },
+  {
+    "kode_produk": "1017-14",
+    "nama_produk": "SF BHN TMF MDL 3IN1",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "1027-14",
+    "nama_produk": "SF BHN TMF MDL TAS",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "2001-12H",
+    "nama_produk": "2001 12 INC HITAM",
+    "kategori": "SOFT12",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 2
+  },
+  {
+    "kode_produk": "2001-12H-B",
+    "nama_produk": "2001 12 INC HITAM SLETING BIRU",
+    "kategori": "SOFT12",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 2
+  },
+  {
+    "kode_produk": "2001-14H",
+    "nama_produk": "2001 14 INC HITAM",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 3
+  },
+  {
+    "kode_produk": "2001-14H-B",
+    "nama_produk": "2001 14 INC HITAM SLTG BIRU",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 8
+  },
+  {
+    "kode_produk": "2001-14H-HJ",
+    "nama_produk": "2001 14 INC HITAM SLTG HIJAU",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 5
+  },
+  {
+    "kode_produk": "2003-11BT",
+    "nama_produk": "2003 11 INC BIRU TUA",
+    "kategori": "SOFT12",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 3
+  },
+  {
+    "kode_produk": "2003-11H",
+    "nama_produk": "2003 11 INC HITAM",
+    "kategori": "SOFT12",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 3
+  },
+  {
+    "kode_produk": "2003-11M",
+    "nama_produk": "2003 11 INC MERAH",
+    "kategori": "SOFT12",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 2
+  },
+  {
+    "kode_produk": "201.5-14",
+    "nama_produk": "201.5 14 INCH SLETING SETENGAH",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 16
+  },
+  {
+    "kode_produk": "201-10S.HT",
+    "nama_produk": "201 SMALL 10 INC HIJAU TUA",
+    "kategori": "SOFT10",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "201-10S.M",
+    "nama_produk": "201 SMALL 10 INC MERAH",
+    "kategori": "SOFT10",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 2
+  },
+  {
+    "kode_produk": "201-11MG",
+    "nama_produk": "201-11MG",
+    "kategori": "SOFT11",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "201-12M",
+    "nama_produk": "201 12 INC MERAH",
+    "kategori": "SOFT12",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 21
+  },
+  {
+    "kode_produk": "201-14A",
+    "nama_produk": "201 14 INC ABU",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 12
+  },
+  {
+    "kode_produk": "201-14BT",
+    "nama_produk": "201 14 INC BIRU TUA",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 27
+  },
+  {
+    "kode_produk": "201-14M",
+    "nama_produk": "201 14 INC MERAH",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 2
+  },
+  {
+    "kode_produk": "201-15M",
+    "nama_produk": "201 15 INC MERAH",
+    "kategori": "SOFT15",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 6
+  },
+  {
+    "kode_produk": "2016-10S.M",
+    "nama_produk": "SF JERSEY SLT 3 C04 - 10 INC SMALL MERAH",
+    "kategori": "SOFT10",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "2017-14U",
+    "nama_produk": "SF BORDIR JERSEY SLT 2 - 14 INC UNGU",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "2018-12BT",
+    "nama_produk": "SF TWINPACK JERSEY 12 INC BIRU TUA",
+    "kategori": "SOFT12",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "2018-12F",
+    "nama_produk": "SF TWINPACK JERSEY 12 INC FANTA",
+    "kategori": "SOFT12",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "2018-12H",
+    "nama_produk": "SF TWINPACK JERSEY 12 INC HITAM",
+    "kategori": "SOFT12",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "2018-12HT",
+    "nama_produk": "SF TWINPACK JERSEY 12 INC HIJAU TUA",
+    "kategori": "SOFT12",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "2018-12M",
+    "nama_produk": "SF TWINPACK JERSEY 12 INC MERAH",
+    "kategori": "SOFT12",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "2018-12O",
+    "nama_produk": "SF TWINPACK JERSEY 12 INC ORANGE",
+    "kategori": "SOFT12",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 4
+  },
+  {
+    "kode_produk": "2018-12U",
+    "nama_produk": "SF TWINPACK JERSEY 12 INC UNGU",
+    "kategori": "SOFT12",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 6
+  },
+  {
+    "kode_produk": "2018-13M",
+    "nama_produk": "SF TWINPACK JERSEY 13 INC MERAH",
+    "kategori": "SOFT13",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "202-13H",
+    "nama_produk": "SOFTCASE POLOS 13 INCH",
+    "kategori": "SOFT13",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "3008-15M",
+    "nama_produk": "3008 15 INC MERAH",
+    "kategori": "SOFT15",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "301-12H",
+    "nama_produk": "301 12 INC HITAM",
+    "kategori": "SOFT12",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 2
+  },
+  {
+    "kode_produk": "301-13H",
+    "nama_produk": "301 13 INC HITAM",
+    "kategori": "SOFT13",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 4
+  },
+  {
+    "kode_produk": "301-13HT",
+    "nama_produk": "301 13 INC HIJAU TUA",
+    "kategori": "SOFT13",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "301-13U",
+    "nama_produk": "301 13 INC UNGU",
+    "kategori": "SOFT13",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 9
+  },
+  {
+    "kode_produk": "301-14BT",
+    "nama_produk": "301 14 INC BIRU TUA",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 26
+  },
+  {
+    "kode_produk": "301-14H",
+    "nama_produk": "301 14 INC HITAM",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 82
+  },
+  {
+    "kode_produk": "301-14HT",
+    "nama_produk": "301 14 INC HIJAU TUA",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 2
+  },
+  {
+    "kode_produk": "301-14P",
+    "nama_produk": "301 14 INC PINK",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "301-14U",
+    "nama_produk": "301 14 INC UNGU",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "767650.2918055556",
+    "nama_produk": "4001 10 INC",
+    "kategori": "SOFT10",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 10
+  },
+  {
+    "kode_produk": "768076.2918055556",
+    "nama_produk": "SF CNVS MTF 12 INC",
+    "kategori": "SOFT12",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 9
+  },
+  {
+    "kode_produk": "4002-14",
+    "nama_produk": "SF CNVS MTF 14 INC",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 2
+  },
+  {
+    "kode_produk": "768441.2918055556",
+    "nama_produk": "4003 12 INC",
+    "kategori": "SOFT12",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 39
+  },
+  {
+    "kode_produk": "4003-14",
+    "nama_produk": "4003 14 INC",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 33
+  },
+  {
+    "kode_produk": "768807.2918055556",
+    "nama_produk": "768807.2918055556",
+    "kategori": "SOFT12",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 14
+  },
+  {
+    "kode_produk": "40BL-12",
+    "nama_produk": "SOFTCASE BULU 12 INC",
+    "kategori": "SOFT12",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 12
+  },
+  {
+    "kode_produk": "40BL-14",
+    "nama_produk": "SOFTCASE BULU 14 INC",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 2
+  },
+  {
+    "kode_produk": "6018-14F",
+    "nama_produk": "SF TWINPAK KRINKLE POLOS 14 INC FANTA",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "6022-12M",
+    "nama_produk": "SF 6022 ELLE 12 INC MERAH",
+    "kategori": "SOFT12",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "7008-13P",
+    "nama_produk": "7008 13 INC PINK",
+    "kategori": "SOFT13",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 2
+  },
+  {
+    "kode_produk": "7008-14M",
+    "nama_produk": "7008 14 INC MERAH",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "7015-10MG",
+    "nama_produk": "7015 10 INC MAGENTA",
+    "kategori": "SOFT10",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "7016-14MG",
+    "nama_produk": "FIDO 14 INC MAGENTA",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "7017-10S.MG",
+    "nama_produk": "POLKADOT SMALL 10 INC MAGENTA",
+    "kategori": "SOFT10",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "7019-12P",
+    "nama_produk": "7019 POLKADOT 12 INC PINK",
+    "kategori": "SOFT12",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "7019-14P",
+    "nama_produk": "7019 POLKADOT 14 INC PINK",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "8001-10S.BM",
+    "nama_produk": "8001 SMALL NEOPRENE 10 INC BIRU MUDA",
+    "kategori": "SOFT10",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "8001-10S.HM",
+    "nama_produk": "8001 SMALL NEOPRENE 10 INC HIJAU MUDA",
+    "kategori": "SOFT10",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "8001-10S.P",
+    "nama_produk": "8001 SMALL NEOPRENE  10 INC PINK",
+    "kategori": "SOFT10",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 7
+  },
+  {
+    "kode_produk": "8001-12HM",
+    "nama_produk": "8001 NEOPRENE 12 INC HIJAU MUDA",
+    "kategori": "SOFT12",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 2
+  },
+  {
+    "kode_produk": "8001-12P",
+    "nama_produk": "8001 NEOPRENE 12 INC PINK",
+    "kategori": "SOFT12",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "8001-13BM",
+    "nama_produk": "8001 NEOPRENE  13 INC BIRU MUDA",
+    "kategori": "SOFT13",
+    "satuan": "-",
+    "gudang": "51b",
+    "qty": 1
+  },
+  {
+    "kode_produk": "8001-13U",
+    "nama_produk": "8001 NEOPRENE 13 INC UNGU",
+    "kategori": "SOFT13",
+    "satuan": "-",
+    "gudang": "51b",
+    "qty": 6
+  },
+  {
+    "kode_produk": "8001-14BM",
+    "nama_produk": "8001 NEOPRENE  14 INC BIRU MUDA",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 4
+  },
+  {
+    "kode_produk": "8001-14U",
+    "nama_produk": "8001 NEOPRENE 14 INC UNGU",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 4
+  },
+  {
+    "kode_produk": "8002-13AM",
+    "nama_produk": "NEOPRENE MODEL POLOS SABLON - 13 INC ABU MUDA",
+    "kategori": "SOFT13",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 14
+  },
+  {
+    "kode_produk": "8002-13AT",
+    "nama_produk": "NEOPRENE MODEL POLOS SABLON - 13 INC ABU TUA",
+    "kategori": "SOFT13",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 3
+  },
+  {
+    "kode_produk": "8002-13CK",
+    "nama_produk": "NEOPRENE MODEL POLOS SABLON - 13 INC COKLAT",
+    "kategori": "SOFT13",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 9
+  },
+  {
+    "kode_produk": "8002-13H",
+    "nama_produk": "NEOPRENE MODEL POLOS SABLON - 13 INC HITAM",
+    "kategori": "SOFT13",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 3
+  },
+  {
+    "kode_produk": "8002-13M",
+    "nama_produk": "NEOPRENE MODEL POLOS SABLON - 13 INC MERAH",
+    "kategori": "SOFT13",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 2
+  },
+  {
+    "kode_produk": "8002-14M",
+    "nama_produk": "NEOPRENE MODEL POLOS SABLON  - 14 INC MERAH",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 9
+  },
+  {
+    "kode_produk": "AXP02-14",
+    "nama_produk": "AMP XP02 SIZE 14 INC",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 16
+  },
+  {
+    "kode_produk": "BN02-12H",
+    "nama_produk": "BN02-12H",
+    "kategori": "SOFT12",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 7
+  },
+  {
+    "kode_produk": "BN02-13H",
+    "nama_produk": "BN02-13H",
+    "kategori": "SOFT13",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 66
+  },
+  {
+    "kode_produk": "BN02-14H",
+    "nama_produk": "BN02-14H",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 126
+  },
+  {
+    "kode_produk": "BN02-15H",
+    "nama_produk": "BN02-15H",
+    "kategori": "SOFT15",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 73
+  },
+  {
+    "kode_produk": "BN03-12H",
+    "nama_produk": "BN03-12H",
+    "kategori": "SOFT12",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 17
+  },
+  {
+    "kode_produk": "BN03-13H",
+    "nama_produk": "BN03-13H",
+    "kategori": "SOFT13",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 15
+  },
+  {
+    "kode_produk": "BN03-15H",
+    "nama_produk": "BN03-15H",
+    "kategori": "SOFT15",
+    "satuan": "-",
+    "gudang": "51b",
+    "qty": 6
+  },
+  {
+    "kode_produk": "BN21-12BT",
+    "nama_produk": "BN21 12 INC BIRU TUA",
+    "kategori": "SOFT12",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "BN22-13H",
+    "nama_produk": "SF POLOS SLT SETENGAH 13 INC HITAM",
+    "kategori": "SOFT13",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 3
+  },
+  {
+    "kode_produk": "BN22-13H-B",
+    "nama_produk": "SF POLOS SLT SETENGAH 13 INC HITAM-BIRU",
+    "kategori": "SOFT13",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 6
+  },
+  {
+    "kode_produk": "BN22-14H-B",
+    "nama_produk": "SF POLOS SLT SETENGAH 14 INC HITAM-BIRU",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 3
+  },
+  {
+    "kode_produk": "BN22-14H-HJ",
+    "nama_produk": "SF POLOS SLT SETENGAH 14 INC HITAM-HIJAU",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 2
+  },
+  {
+    "kode_produk": "BN22-14H-O",
+    "nama_produk": "SF POLOS SLT SETENGAH 14 INC HITAM-ORANGE",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 3
+  },
+  {
+    "kode_produk": "BN22-14H-U",
+    "nama_produk": "SF POLOS SLT SETENGAH 14 INC HITAM-UNGU",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 3
+  },
+  {
+    "kode_produk": "BN22-15H",
+    "nama_produk": "SF POLOS SLT SETENGAH 15 INC HITAM",
+    "kategori": "SOFT15",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "BN22-15H-B",
+    "nama_produk": "SF POLOS SLT SETENGAH 15 INC HITAM-BIRU",
+    "kategori": "SOFT15",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 3
+  },
+  {
+    "kode_produk": "BN22-15H-HJ",
+    "nama_produk": "SF POLOS SLT SETENGAH 15 INC HITAM-HIJAU",
+    "kategori": "SOFT15",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 3
+  },
+  {
+    "kode_produk": "BN22-17 H-B",
+    "nama_produk": "BN22-17 H-B",
+    "kategori": "SOFT17",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 4
+  },
+  {
+    "kode_produk": "BN22-17 H-HJ",
+    "nama_produk": "BN22-17 H-HJ",
+    "kategori": "SOFT17",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 4
+  },
+  {
+    "kode_produk": "BN22-17H",
+    "nama_produk": "SF POLOS SLT SETENGAH 17 INC HITAM",
+    "kategori": "SOFT17",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 4
+  },
+  {
+    "kode_produk": "CD01-14AT-H",
+    "nama_produk": "CD01 14 INC ABU TUA - HITAM",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "CD02-13AT",
+    "nama_produk": "CD02-13AT",
+    "kategori": "SOFT13",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "CD02-13BT",
+    "nama_produk": "CD02-13BT",
+    "kategori": "SOFT13",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 3
+  },
+  {
+    "kode_produk": "CD02-14M",
+    "nama_produk": "CD02-14M",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "CD03-14M",
+    "nama_produk": "CD03-14M",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51b",
+    "qty": 3
+  },
+  {
+    "kode_produk": "CD06-14",
+    "nama_produk": "SF 14 INCH BHN CORDURA BORDIR",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 7
+  },
+  {
+    "kode_produk": "CGW01-14",
+    "nama_produk": "SF 14 BHN CORDURA GUCCI VARIASI PULLER",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 77
+  },
+  {
+    "kode_produk": "DN01-10H",
+    "nama_produk": "DN01 10 INC HITAM",
+    "kategori": "SOFT10",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "DN102-12BT",
+    "nama_produk": "DN102 12 INC BIRU TUA",
+    "kategori": "SOFT12",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "DN102-12MG",
+    "nama_produk": "DN102 12 INC MAGENTA",
+    "kategori": "SOFT12",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "DN102-12O",
+    "nama_produk": "DN102 12 INC ORANGE",
+    "kategori": "SOFT12",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "DN102-12U",
+    "nama_produk": "DN102 12 INC UNGU",
+    "kategori": "SOFT12",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "DN102-13BT",
+    "nama_produk": "DN102 13 INC BIRU TUA",
+    "kategori": "SOFT13",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "DN102-13C",
+    "nama_produk": "DN102 13 INC COKLAT",
+    "kategori": "SOFT13",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 2
+  },
+  {
+    "kode_produk": "DN102-13M",
+    "nama_produk": "DN102 13 INC MERAH",
+    "kategori": "SOFT13",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 2
+  },
+  {
+    "kode_produk": "DN102-14U",
+    "nama_produk": "DN102 14 INC UNGU",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "HK01-10S.M",
+    "nama_produk": "HK01 SLIPCASE SMALL 10 INC MERAH",
+    "kategori": "SOFT10",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "HK01-12C",
+    "nama_produk": "HK01 SLIPCASE 12 INC COKLAT",
+    "kategori": "SOFT12",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "HK02-14A",
+    "nama_produk": "HK02 SLIPCASE 14 INC ABU",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "HK05-13 BT-AM",
+    "nama_produk": "HK05 13 INC BIRU TUA-ABU MUDA",
+    "kategori": "SOFT13",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "HK06-12H",
+    "nama_produk": "SF HK ELLE 12 INC HITAM",
+    "kategori": "SOFT12",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "HK06-12M",
+    "nama_produk": "SF HK ELLE 12 INC MERAH",
+    "kategori": "SOFT12",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 6
+  },
+  {
+    "kode_produk": "HK10-14H",
+    "nama_produk": "SF 2 SLTG + SLTG DPN CDR NY 14 INC HTM",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "HK11-13 BT",
+    "nama_produk": "SF BHN LC + BHN BINTIK 13 INC BIRU TUA",
+    "kategori": "SOFT13",
+    "satuan": "-",
+    "gudang": "51b",
+    "qty": 3
+  },
+  {
+    "kode_produk": "HK11-13 H",
+    "nama_produk": "SF BHN LC + BHN BINTIK 13 INC HITAM",
+    "kategori": "SOFT13",
+    "satuan": "-",
+    "gudang": "51b",
+    "qty": 1
+  },
+  {
+    "kode_produk": "HK11-15BT",
+    "nama_produk": "SF BHN LC + BHN BINTIK 15 INC BIRU TUA",
+    "kategori": "SOFT15",
+    "satuan": "-",
+    "gudang": "51b",
+    "qty": 4
+  },
+  {
+    "kode_produk": "HK12-14 AT",
+    "nama_produk": "HK12 14 INC ABU TUA",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51b",
+    "qty": 8
+  },
+  {
+    "kode_produk": "HK12-14 H",
+    "nama_produk": "HK12 14 INC HITAM",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51b",
+    "qty": 1
+  },
+  {
+    "kode_produk": "HL01-14",
+    "nama_produk": "SF BHN HOLOGRAM 14 INCH",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 5
+  },
+  {
+    "kode_produk": "HRJ33-12H",
+    "nama_produk": "SOFTCASE BHN PIU JERUK 12 INC HITAM",
+    "kategori": "SOFT12",
+    "satuan": "-",
+    "gudang": "51b",
+    "qty": 1
+  },
+  {
+    "kode_produk": "HRJ33-13BN",
+    "nama_produk": "SOFTCASE BHN PIU JERUK 13 INC BIRU NAVY",
+    "kategori": "SOFT13",
+    "satuan": "-",
+    "gudang": "51b",
+    "qty": 1
+  },
+  {
+    "kode_produk": "HRJ33-14HJM",
+    "nama_produk": "SOFTCASE BHN PIU JERUK 14 INC HIJAU MUDA",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51b",
+    "qty": 1
+  },
+  {
+    "kode_produk": "HRK03-14",
+    "nama_produk": "SF BHN TMF",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 29
+  },
+  {
+    "kode_produk": "HRP03-14",
+    "nama_produk": "SF BHN BOTEGA J-77 14 INC",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51b",
+    "qty": 129
+  },
+  {
+    "kode_produk": "HRP03-14BW",
+    "nama_produk": "SF BHN GOSOK 14 INC BW",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 4
+  },
+  {
+    "kode_produk": "HRP03-14C",
+    "nama_produk": "SF BHN GOSOK 14 INC COKLAT",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51b",
+    "qty": 1
+  },
+  {
+    "kode_produk": "J01-14",
+    "nama_produk": "SF BHN JEANS 14 INC",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 37
+  },
+  {
+    "kode_produk": "JED01-14",
+    "nama_produk": "JED01 14 INC",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "JED02-14",
+    "nama_produk": "JED02 14 INC",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "KR101-14AT",
+    "nama_produk": "KR101 14 INC ABU TUA",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 4
+  },
+  {
+    "kode_produk": "KR101-14H",
+    "nama_produk": "KR101 14 INC HITAM",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 4
+  },
+  {
+    "kode_produk": "LEJ-14",
+    "nama_produk": "LEJ 14 INC",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 6
+  },
+  {
+    "kode_produk": "NEO1-14",
+    "nama_produk": "NEO1 14 INC",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "PC91-10U",
+    "nama_produk": "PORCHE 10 INC UNGU",
+    "kategori": "SOFT10",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "PR02-12A",
+    "nama_produk": "PR02 12 INC ABU",
+    "kategori": "SOFT12",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "PRD38-12CR",
+    "nama_produk": "PRADA MDL 38 12 INC CREAM",
+    "kategori": "SOFT12",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "PX03-14AT",
+    "nama_produk": "PX03-14AT",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 29
+  },
+  {
+    "kode_produk": "PX03-14C",
+    "nama_produk": "PX03-14C",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 27
+  },
+  {
+    "kode_produk": "PX03-15C",
+    "nama_produk": "PX03-15C",
+    "kategori": "SOFT15",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "PX05-13AM",
+    "nama_produk": "PX05-13AM",
+    "kategori": "SOFT13",
+    "satuan": "-",
+    "gudang": "51b",
+    "qty": 23
+  },
+  {
+    "kode_produk": "PX05-13C",
+    "nama_produk": "PX05-13C",
+    "kategori": "SOFT13",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 14
+  },
+  {
+    "kode_produk": "PX05-13H",
+    "nama_produk": "PX05-13H",
+    "kategori": "SOFT13",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 4
+  },
+  {
+    "kode_produk": "PX05-14AT",
+    "nama_produk": "PX05-14AT",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 19
+  },
+  {
+    "kode_produk": "PX05-14BT",
+    "nama_produk": "PX05-14BT",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 11
+  },
+  {
+    "kode_produk": "PX05-14C",
+    "nama_produk": "PX05-14C",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 10
+  },
+  {
+    "kode_produk": "PX05-15AM",
+    "nama_produk": "PX05-15AM",
+    "kategori": "SOFT15",
+    "satuan": "-",
+    "gudang": "51b",
+    "qty": 8
+  },
+  {
+    "kode_produk": "PX05-15BT",
+    "nama_produk": "PX05-15BT",
+    "kategori": "SOFT15",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 5
+  },
+  {
+    "kode_produk": "PX05-15C",
+    "nama_produk": "PX05-15C",
+    "kategori": "SOFT15",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 10
+  },
+  {
+    "kode_produk": "PX05-15H",
+    "nama_produk": "PX05-15H",
+    "kategori": "SOFT15",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 5
+  },
+  {
+    "kode_produk": "PX07-12C",
+    "nama_produk": "PX07 12 INC COKLAT",
+    "kategori": "SOFT12",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "PX08 H",
+    "nama_produk": "PX08 UP TO 14 INC HITAM",
+    "kategori": "TAS",
+    "satuan": "-",
+    "gudang": "51b",
+    "qty": 7
+  },
+  {
+    "kode_produk": "PX101-14H",
+    "nama_produk": "PX101 14 INC HITAM",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51b",
+    "qty": 11
+  },
+  {
+    "kode_produk": "PX10-14H",
+    "nama_produk": "PX10 14 INC HITAM",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51b",
+    "qty": 56
+  },
+  {
+    "kode_produk": "PX102-14H",
+    "nama_produk": "PX102 14 INC HITAM",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51b",
+    "qty": 5
+  },
+  {
+    "kode_produk": "QN01-14M",
+    "nama_produk": "SF MODEL POLOS QUEN 14INC MERAH",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "QN91-10O",
+    "nama_produk": "QUEN 10 INC ORANGE",
+    "kategori": "SOFT10",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "SL82 M",
+    "nama_produk": "TAS SLEMPANG SPD DENIM MERAH",
+    "kategori": "TS",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 5
+  },
+  {
+    "kode_produk": "SS01-12",
+    "nama_produk": "SISA-SISA BAHAN",
+    "kategori": "SOFT12",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 5
+  },
+  {
+    "kode_produk": "SS01-14",
+    "nama_produk": "SISA-SISA BAHAN",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 5
+  },
+  {
+    "kode_produk": "TB01",
+    "nama_produk": "CASE COVER HUION PRO16",
+    "kategori": "SOFT",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 4
+  },
+  {
+    "kode_produk": "TB03",
+    "nama_produk": "CASE COVER HUION GT-133",
+    "kategori": "SOFT",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 16
+  },
+  {
+    "kode_produk": "TB201 H",
+    "nama_produk": "TB201 H",
+    "kategori": "SOFT",
+    "satuan": "-",
+    "gudang": "51b",
+    "qty": 10
+  },
+  {
+    "kode_produk": "TC02 H",
+    "nama_produk": "TC02 H",
+    "kategori": "TS",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 22
+  },
+  {
+    "kode_produk": "THK 08.1 F",
+    "nama_produk": "TAS TABLET HK08 BDR FANTA",
+    "kategori": "TAS",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 4
+  },
+  {
+    "kode_produk": "TKB",
+    "nama_produk": "TOTE BAG KANVAS BATIK",
+    "kategori": "TS",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 3
+  },
+  {
+    "kode_produk": "TL01-14",
+    "nama_produk": "TAS LAPTOP MDL AMPLOP 14 INCH",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 11
+  },
+  {
+    "kode_produk": "TP03 HJ",
+    "nama_produk": "WAISTBAG SLT HIJAU",
+    "kategori": "TS",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 8
+  },
+  {
+    "kode_produk": "TP03 HJ-H",
+    "nama_produk": "WAISTBAG SLT HITAM",
+    "kategori": "TS",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 6
+  },
+  {
+    "kode_produk": "XP01-12BN",
+    "nama_produk": "SF BHN DENIM 12 INC BIRU NAVY",
+    "kategori": "SOFT12",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 4
+  },
+  {
+    "kode_produk": "XP01-12H",
+    "nama_produk": "SF BHN DENIM 12 INC HITAM",
+    "kategori": "SOFT12",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 3
+  },
+  {
+    "kode_produk": "XP01-14BN",
+    "nama_produk": "SF BHN DENIM 14 INC BIRU NAVY",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 12
+  },
+  {
+    "kode_produk": "XP01-14H",
+    "nama_produk": "SF BHN DENIM 14 INC HITAM",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 13
+  },
+  {
+    "kode_produk": "XP02-13A",
+    "nama_produk": "SF BHN DENIM SLT DPN BDR 13 INC ABU",
+    "kategori": "SOFT13",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 6
+  },
+  {
+    "kode_produk": "XP02-13M",
+    "nama_produk": "SF BHN DENIM SLT DPN BDR 13 INC MERAH",
+    "kategori": "SOFT13",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 10
+  },
+  {
+    "kode_produk": "XP03-12M",
+    "nama_produk": "SF BHN DENIM BORDIR 12 INC MERAH",
+    "kategori": "SOFT12",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "XP03-12U",
+    "nama_produk": "SF BHN DENIM BORDIR 12 INC UNGU",
+    "kategori": "SOFT12",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "XP101-13",
+    "nama_produk": "SF DENIM POLOS 13 INC",
+    "kategori": "SOFT13",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "XP101-14",
+    "nama_produk": "SF DENIM POLOS 14 INC",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 46
+  },
+  {
+    "kode_produk": "XP101-15",
+    "nama_produk": "SF DENIM POLOS 15 INC",
+    "kategori": "SOFT15",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 8
+  },
+  {
+    "kode_produk": "XP106-14BT",
+    "nama_produk": "SF DENIM POLOS SLT DPN MRG 14 INC BIRU TUA",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51B",
+    "qty": 1
+  },
+  {
+    "kode_produk": "XP107-14AM",
+    "nama_produk": "XP107-14AM",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51b",
+    "qty": 9
+  },
+  {
+    "kode_produk": "XP108-14H",
+    "nama_produk": "XP108 14 INCH HITAM",
+    "kategori": "SOFT14",
+    "satuan": "-",
+    "gudang": "51b",
+    "qty": 8
+  }
+]
