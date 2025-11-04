@@ -1,12 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 
 import "@/app/globals.css";
 import { AppSidebar } from "@/components/AppSidebar";
 import { Button } from "@/components/ui/button";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = localFont({
+  src: "../public/fonts/Inter-roman.var.woff2",
+  weight: "100 900",
+  display: "swap"
+});
 
 export const metadata: Metadata = {
   title: "StockVision Pro",

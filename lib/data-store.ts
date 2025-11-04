@@ -1,4 +1,7 @@
+import "server-only";
+
 import fs from "fs";
+import os from "os";
 import path from "path";
 import { isSameMonth, parse, parseISO } from "date-fns";
 import { z } from "zod";
@@ -27,44 +30,74 @@ const salesSchema = z.object({
   total: z.number()
 });
 
-const DATA_DIR = path.join(process.cwd(), ".sv-data");
+const DATA_DIR =
+  process.env.SV_DATA_DIR ??
+  (process.env.VERCEL ? path.join(os.tmpdir(), "sv-data") : path.join(process.cwd(), ".sv-data"));
 const STOCK_FILE = path.join(DATA_DIR, "stock.json");
 const SALES_FILE = path.join(DATA_DIR, "sales.json");
 
-function ensureDataDir() {
-  if (!fs.existsSync(DATA_DIR)) {
-    fs.mkdirSync(DATA_DIR, { recursive: true });
+type MemoryStore = {
+  stock: StockRecord[];
+  sales: SalesRecord[];
+};
+
+let canUseDisk = true;
+const memoryStore: MemoryStore = {
+  stock: clone(defaultStock),
+  sales: clone(defaultSales)
+};
+
+function clone<T>(value: T): T {
+  if (typeof structuredClone === "function") {
+    return structuredClone(value);
   }
+  return JSON.parse(JSON.stringify(value)) as T;
 }
 
-function readJsonFile<T>(file: string, fallback: T): T {
+function readJsonFile<K extends keyof MemoryStore>(key: K, file: string): MemoryStore[K] {
+  if (canUseDisk && fs.existsSync(file)) {
+    try {
+      const raw = fs.readFileSync(file, "utf-8");
+      const parsed = JSON.parse(raw) as MemoryStore[K];
+      memoryStore[key] = parsed;
+      return clone(parsed);
+    } catch {
+      canUseDisk = false;
+    }
+  }
+  return clone(memoryStore[key]);
+}
+
+function writeJsonFile<K extends keyof MemoryStore>(key: K, file: string, data: MemoryStore[K]) {
+  memoryStore[key] = clone(data);
+  if (!canUseDisk) {
+    return;
+  }
+
   try {
-    const raw = fs.readFileSync(file, "utf-8");
-    return JSON.parse(raw) as T;
+    if (!fs.existsSync(DATA_DIR)) {
+      fs.mkdirSync(DATA_DIR, { recursive: true });
+    }
+    fs.writeFileSync(file, JSON.stringify(data, null, 2), "utf-8");
   } catch {
-    return fallback;
+    canUseDisk = false;
   }
-}
-
-function writeJsonFile<T>(file: string, data: T) {
-  ensureDataDir();
-  fs.writeFileSync(file, JSON.stringify(data, null, 2), "utf-8");
 }
 
 export function getStock(): StockRecord[] {
-  return readJsonFile<StockRecord[]>(STOCK_FILE, structuredClone(defaultStock));
+  return readJsonFile("stock", STOCK_FILE);
 }
 
 export function getSales(): SalesRecord[] {
-  return readJsonFile<SalesRecord[]>(SALES_FILE, structuredClone(defaultSales));
+  return readJsonFile("sales", SALES_FILE);
 }
 
 export function setStock(data: StockRecord[]) {
-  writeJsonFile(STOCK_FILE, data);
+  writeJsonFile("stock", STOCK_FILE, data);
 }
 
 export function setSales(data: SalesRecord[]) {
-  writeJsonFile(SALES_FILE, data);
+  writeJsonFile("sales", SALES_FILE, data);
 }
 
 export function validateStockPayload(payload: unknown) {

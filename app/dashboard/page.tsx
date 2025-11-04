@@ -2,6 +2,7 @@ import { getDashboardSummary } from "@/lib/data-store";
 
 import { DashboardClient } from "./dashboard-client";
 
+export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 

@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 
 import { getStock, setStock, validateStockPayload } from "@/lib/data-store";
 
+export const runtime = "nodejs";
+
 export async function GET() {
   return NextResponse.json({
     data: getStock()
