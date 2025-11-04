@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { addMonths, isSameMonth, parseISO } from "date-fns";
+import { isSameMonth, parse, parseISO } from "date-fns";
 import { z } from "zod";
 
 import { salesData as defaultSales, stockData as defaultStock } from "@/lib/mock-data";
@@ -137,12 +137,8 @@ export function getDashboardSummary(): DashboardSummary {
   const now = new Date();
   const salesThisMonth = linkedArray.flatMap((p) => p.transactions);
   const filteredMonthlySales = salesThisMonth.filter((sale) => {
-    try {
-      const saleDate = parseISO(sale.tanggal);
-      return !Number.isNaN(saleDate.getTime()) && isSameMonth(saleDate, now);
-    } catch {
-      return false;
-    }
+    const saleDate = parseSaleDate(sale.tanggal);
+    return saleDate ? isSameMonth(saleDate, now) : false;
   });
 
   const monthlySalesQty = filteredMonthlySales.reduce((acc, sale) => acc + sale.qty, 0);
@@ -167,16 +163,10 @@ export function getDashboardSummary(): DashboardSummary {
     (product) => Math.max(product.qty, 0)
   );
 
-  const startDate = filteredMonthlySales.length
-    ? filteredMonthlySales
-        .map((sale) => parseISO(sale.tanggal))
-        .sort((a, b) => a.getTime() - b.getTime())[0]
-    : addMonths(now, -3);
-
   const salesTrendMap = new Map<string, number>();
   sales.forEach((sale) => {
-    const saleDate = parseISO(sale.tanggal);
-    if (Number.isNaN(saleDate.getTime())) {
+    const saleDate = parseSaleDate(sale.tanggal);
+    if (!saleDate) {
       return;
     }
     const key = saleDate.toISOString().split("T")[0];
@@ -200,6 +190,65 @@ export function getDashboardSummary(): DashboardSummary {
     warehouseDistribution,
     products: linkedArray
   };
+}
+
+function parseSaleDate(value: string) {
+  if (!value) {
+    return null;
+  }
+
+  const trimmed = value.trim();
+  if (!trimmed) {
+    return null;
+  }
+
+  const numeric = Number(trimmed);
+  if (!Number.isNaN(numeric) && numeric > 0) {
+    const excelDate = excelSerialToDate(numeric);
+    if (excelDate) {
+      return excelDate;
+    }
+  }
+
+  try {
+    const isoDate = parseISO(trimmed);
+    if (!Number.isNaN(isoDate.getTime())) {
+      return isoDate;
+    }
+  } catch {
+    // ignore
+  }
+
+  const knownFormats = ["dd/MM/yyyy", "d/M/yyyy", "MM/dd/yyyy", "M/d/yyyy", "yyyy/MM/dd"];
+  for (const format of knownFormats) {
+    try {
+      const parsedDate = parse(trimmed, format, new Date());
+      if (!Number.isNaN(parsedDate.getTime())) {
+        return parsedDate;
+      }
+    } catch {
+      // ignore and try next format
+    }
+  }
+
+  const fallback = new Date(trimmed);
+  return Number.isNaN(fallback.getTime()) ? null : fallback;
+}
+
+function excelSerialToDate(serial: number) {
+  if (!Number.isFinite(serial) || serial <= 0) {
+    return null;
+  }
+
+  const excelEpoch = Date.UTC(1899, 11, 30);
+  const wholeDays = Math.floor(serial);
+  const fractionalDay = serial - wholeDays;
+  const dayOffset = wholeDays > 59 ? wholeDays - 1 : wholeDays; // adjust for Excel leap year bug
+
+  const millisecondsFromDays = dayOffset * 24 * 60 * 60 * 1000;
+  const millisecondsFromFraction = Math.round(fractionalDay * 24 * 60 * 60 * 1000);
+
+  return new Date(excelEpoch + millisecondsFromDays + millisecondsFromFraction);
 }
 
 function aggregateBy<T>(

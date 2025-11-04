@@ -41,9 +41,12 @@ const palette = [
   "#14b8a6"
 ];
 
+type SalesChartType = "line" | "bar" | "pie" | "histogram";
+
 export function DashboardClient({ summary }: DashboardClientProps) {
   const [selectedProduct, setSelectedProduct] = useState<LinkedProduct | null>(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [salesChartType, setSalesChartType] = useState<SalesChartType>("line");
 
   const productColumns = useMemo(
     () => [
@@ -84,6 +87,107 @@ export function DashboardClient({ summary }: DashboardClientProps) {
 
   const bestSellerList = summary.bestSellers.slice(0, 5);
   const lowStockList = summary.lowStock.slice(0, 5);
+  const hasSalesTrendData = summary.salesTrend.length > 0;
+
+  const recentSalesTrend = useMemo(
+    () => summary.salesTrend.slice(Math.max(summary.salesTrend.length - 30, 0)),
+    [summary.salesTrend]
+  );
+
+  const pieSalesTrend = useMemo(
+    () =>
+      recentSalesTrend.slice(-8).map((item) => ({
+        ...item,
+        name: formatDateLabel(item.date)
+      })),
+    [recentSalesTrend]
+  );
+
+  const salesHistogramData = useMemo(
+    () => buildSalesHistogram(summary.salesTrend),
+    [summary.salesTrend]
+  );
+
+  const salesChartContent = useMemo(() => {
+    if (!hasSalesTrendData) {
+      return null;
+    }
+
+    switch (salesChartType) {
+      case "bar":
+        return (
+          <BarChart data={recentSalesTrend}>
+            <CartesianGrid strokeDasharray="3 3" vertical={false} />
+            <XAxis
+              dataKey="date"
+              tick={{ fontSize: 12 }}
+              tickFormatter={(value) => formatDateLabel(value)}
+            />
+            <YAxis tickFormatter={(value) => formatCurrency(value)} tick={{ fontSize: 12 }} />
+            <Tooltip
+              formatter={(value: number) => formatCurrency(value)}
+              labelFormatter={(value) => formatDateLabel(value)}
+            />
+            <Bar dataKey="value" fill={palette[0]} radius={[6, 6, 0, 0]} />
+          </BarChart>
+        );
+      case "pie":
+        return (
+          <PieChart>
+            <Pie
+              data={pieSalesTrend}
+              dataKey="value"
+              nameKey="name"
+              cx="50%"
+              cy="50%"
+              outerRadius={100}
+              label
+            >
+              {pieSalesTrend.map((item, index) => (
+                <Cell key={item.name + index} fill={palette[index % palette.length]} />
+              ))}
+            </Pie>
+            <Tooltip formatter={(value: number) => formatCurrency(value)} />
+            <Legend />
+          </PieChart>
+        );
+      case "histogram":
+        return (
+          <BarChart data={salesHistogramData}>
+            <CartesianGrid strokeDasharray="3 3" vertical={false} />
+            <XAxis dataKey="name" tick={{ fontSize: 12 }} />
+            <YAxis tick={{ fontSize: 12 }} allowDecimals={false} />
+            <Tooltip formatter={(value: number) => `${value} day${value === 1 ? "" : "s"}`} />
+            <Bar dataKey="value" fill={palette[1]} radius={[6, 6, 0, 0]} />
+          </BarChart>
+        );
+      case "line":
+      default:
+        return (
+          <LineChart data={recentSalesTrend}>
+            <CartesianGrid strokeDasharray="3 3" vertical={false} />
+            <XAxis
+              dataKey="date"
+              tick={{ fontSize: 12 }}
+              tickFormatter={(value) => formatDateLabel(value)}
+            />
+            <YAxis tickFormatter={(value) => formatCurrency(value)} tick={{ fontSize: 12 }} />
+            <Tooltip
+              formatter={(value: number) => formatCurrency(value)}
+              labelFormatter={(value) => formatDateLabel(value)}
+            />
+            <Legend />
+            <Line
+              type="monotone"
+              dataKey="value"
+              stroke={palette[0]}
+              strokeWidth={2}
+              dot={{ r: 3 }}
+            />
+          </LineChart>
+        );
+    }
+  }, [hasSalesTrendData, pieSalesTrend, recentSalesTrend, salesChartType, salesHistogramData]);
 
   return (
     <div className="space-y-8">
@@ -144,23 +248,31 @@ export function DashboardClient({ summary }: DashboardClientProps) {
           title="Sales trend"
           description="Daily sales value based on posted transactions."
           className="lg:col-span-1"
+          action={
+            <label className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
+              View as
+              <select
+                value={salesChartType}
+                onChange={(event) => setSalesChartType(event.target.value as SalesChartType)}
+                className="h-8 rounded-md border border-border bg-background px-2 text-xs font-medium text-foreground shadow-sm focus:outline-none focus:ring-2 focus:ring-ring"
+              >
+                <option value="line">Line</option>
+                <option value="bar">Bar</option>
+                <option value="pie">Pie</option>
+                <option value="histogram">Histogram</option>
+              </select>
+            </label>
+          }
         >
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={summary.salesTrend}>
-              <CartesianGrid strokeDasharray="3 3" vertical={false} />
-              <XAxis dataKey="date" tick={{ fontSize: 12 }} />
-              <YAxis tickFormatter={(value) => formatCurrency(value)} tick={{ fontSize: 12 }} />
-              <Tooltip formatter={(value: number) => formatCurrency(value)} />
-              <Legend />
-              <Line
-                type="monotone"
-                dataKey="value"
-                stroke={palette[0]}
-                strokeWidth={2}
-                dot={{ r: 3 }}
-              />
-            </LineChart>
-          </ResponsiveContainer>
+          {hasSalesTrendData ? (
+            <ResponsiveContainer width="100%" height="100%">
+              {salesChartContent}
+            </ResponsiveContainer>
+          ) : (
+            <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
+              No sales data available.
+            </div>
+          )}
         </ChartCard>
 
         <ChartCard
@@ -283,4 +395,66 @@ export function DashboardClient({ summary }: DashboardClientProps) {
 
 function formatCurrency(value: number) {
   return `IDR ${value.toLocaleString()}`;
+}
+
+function formatDateLabel(value: string | number) {
+  if (typeof value === "string") {
+    const isoMatch = value.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    if (isoMatch) {
+      const [, year, month, day] = isoMatch;
+      const localDate = new Date(Number(year), Number(month) - 1, Number(day));
+      return localDate.toLocaleDateString(undefined, { month: "short", day: "numeric" });
+    }
+  }
+
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) {
+    return typeof value === "string" ? value : value.toString();
+  }
+  return date.toLocaleDateString(undefined, { month: "short", day: "numeric" });
+}
+
+function buildSalesHistogram(data: { value: number }[]) {
+  const values = data.map((item) => item.value).filter((amount) => Number.isFinite(amount));
+
+  if (values.length === 0) {
+    return [];
+  }
+
+  const min = Math.min(...values);
+  const max = Math.max(...values);
+
+  if (min === max) {
+    return [
+      {
+        name: formatCurrency(min),
+        value: values.length
+      }
+    ];
+  }
+
+  const binCount = Math.min(7, Math.max(3, Math.round(Math.sqrt(values.length))));
+  const binSize = (max - min) / binCount;
+
+  const bins = Array.from({ length: binCount }, (_, index) => {
+    const start = min + index * binSize;
+    const end = index === binCount - 1 ? max : min + (index + 1) * binSize;
+    return { start, end, value: 0 };
+  });
+
+  values.forEach((amount) => {
+    const index = amount === max ? binCount - 1 : Math.floor((amount - min) / binSize);
+    const clampedIndex = Math.min(Math.max(index, 0), binCount - 1);
+    bins[clampedIndex].value += 1;
+  });
+
+  return bins.map((bin, index) => ({
+    name:
+      binCount === 1
+        ? formatCurrency(bin.start)
+        : index === bins.length - 1
+        ? `${formatCurrency(bin.start)}+`
+        : `${formatCurrency(bin.start)} - ${formatCurrency(bin.end)}`,
+    value: bin.value
+  }));
 }
