@@ -147,7 +147,10 @@ export function getDashboardSummary(): DashboardSummary {
       } satisfies StockRecord);
 
     const salesTransactions = salesByCode.get(code) ?? [];
-    const totalSales = salesTransactions.reduce((acc, item) => acc + Math.max(item.qty, 0), 0);
+    const totalSales = salesTransactions.reduce((acc, item) => {
+      const qty = toNumeric(item.qty) ?? 0;
+      return acc + Math.max(qty, 0);
+    }, 0);
     const remaining = stockRecord.qty - totalSales;
 
     return {
@@ -174,8 +177,11 @@ export function getDashboardSummary(): DashboardSummary {
     return saleDate ? isSameMonth(saleDate, now) : false;
   });
 
-  const monthlySalesQty = filteredMonthlySales.reduce((acc, sale) => acc + sale.qty, 0);
-  const monthlySalesValue = filteredMonthlySales.reduce((acc, sale) => acc + sale.total, 0);
+  const monthlySalesQty = filteredMonthlySales.reduce((acc, sale) => {
+    const qty = toNumeric(sale.qty) ?? 0;
+    return acc + Math.max(qty, 0);
+  }, 0);
+  const monthlySalesValue = filteredMonthlySales.reduce((acc, sale) => acc + getSaleValue(sale), 0);
 
   const bestSellers = [...linkedArray]
     .sort((a, b) => b.totalSales - a.totalSales)
@@ -202,8 +208,12 @@ export function getDashboardSummary(): DashboardSummary {
     if (!saleDate) {
       return;
     }
+    const saleValue = getSaleValue(sale);
+    if (!Number.isFinite(saleValue)) {
+      return;
+    }
     const key = saleDate.toISOString().split("T")[0];
-    salesTrendMap.set(key, (salesTrendMap.get(key) ?? 0) + sale.total);
+    salesTrendMap.set(key, (salesTrendMap.get(key) ?? 0) + saleValue);
   });
 
   const salesTrend = Array.from(salesTrendMap.entries())
@@ -297,4 +307,39 @@ function aggregateBy<T>(
   return Array.from(map.entries())
     .map(([name, total]) => ({ name, value: total }))
     .sort((a, b) => b.value - a.value);
+}
+
+function toNumeric(value: number | string | null | undefined) {
+  if (typeof value === "number") {
+    return Number.isFinite(value) ? value : null;
+  }
+  if (typeof value === "string") {
+    const normalized = value.trim().replace(/[^0-9.-]+/g, "");
+    if (!normalized) {
+      return null;
+    }
+    const parsed = Number(normalized);
+    return Number.isFinite(parsed) ? parsed : null;
+  }
+  return null;
+}
+
+function getSaleValue(sale: SalesRecord) {
+  const total = toNumeric(sale.total);
+  if (total !== null) {
+    return total;
+  }
+
+  const jumlah = toNumeric(sale.jumlah);
+  if (jumlah !== null) {
+    return jumlah;
+  }
+
+  const qty = toNumeric(sale.qty);
+  const unitPrice = toNumeric(sale.harga_satuan);
+  if (qty !== null && unitPrice !== null) {
+    return qty * unitPrice;
+  }
+
+  return 0;
 }

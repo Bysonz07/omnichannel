@@ -1,6 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { Fragment, useMemo, useState } from "react";
+import type { ReactElement } from "react";
 import {
   Bar,
   BarChart,
@@ -42,6 +43,12 @@ const palette = [
 ];
 
 type SalesChartType = "line" | "bar" | "pie" | "histogram";
+const salesChartOptions: { value: SalesChartType; label: string }[] = [
+  { value: "line", label: "Line" },
+  { value: "bar", label: "Bar" },
+  { value: "pie", label: "Pie" },
+  { value: "histogram", label: "Hist" }
+];
 
 export function DashboardClient({ summary }: DashboardClientProps) {
   const [selectedProduct, setSelectedProduct] = useState<LinkedProduct | null>(null);
@@ -87,11 +94,15 @@ export function DashboardClient({ summary }: DashboardClientProps) {
 
   const bestSellerList = summary.bestSellers.slice(0, 5);
   const lowStockList = summary.lowStock.slice(0, 5);
-  const hasSalesTrendData = summary.salesTrend.length > 0;
+  const sanitizedSalesTrend = useMemo(
+    () => summary.salesTrend.filter((item) => Number.isFinite(item.value)),
+    [summary.salesTrend]
+  );
+  const hasSalesTrendData = sanitizedSalesTrend.length > 0;
 
   const recentSalesTrend = useMemo(
-    () => summary.salesTrend.slice(Math.max(summary.salesTrend.length - 30, 0)),
-    [summary.salesTrend]
+    () => sanitizedSalesTrend.slice(Math.max(sanitizedSalesTrend.length - 30, 0)),
+    [sanitizedSalesTrend]
   );
 
   const pieSalesTrend = useMemo(
@@ -104,13 +115,13 @@ export function DashboardClient({ summary }: DashboardClientProps) {
   );
 
   const salesHistogramData = useMemo(
-    () => buildSalesHistogram(summary.salesTrend),
-    [summary.salesTrend]
+    () => buildSalesHistogram(sanitizedSalesTrend),
+    [sanitizedSalesTrend]
   );
 
-  const salesChartContent = useMemo(() => {
+  const salesChartContent = useMemo<ReactElement>(() => {
     if (!hasSalesTrendData) {
-      return null;
+      return <Fragment />;
     }
 
     switch (salesChartType) {
@@ -249,19 +260,27 @@ export function DashboardClient({ summary }: DashboardClientProps) {
           description="Daily sales value based on posted transactions."
           className="lg:col-span-1"
           action={
-            <label className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
-              View as
-              <select
-                value={salesChartType}
-                onChange={(event) => setSalesChartType(event.target.value as SalesChartType)}
-                className="h-8 rounded-md border border-border bg-background px-2 text-xs font-medium text-foreground shadow-sm focus:outline-none focus:ring-2 focus:ring-ring"
-              >
-                <option value="line">Line</option>
-                <option value="bar">Bar</option>
-                <option value="pie">Pie</option>
-                <option value="histogram">Histogram</option>
-              </select>
-            </label>
+            <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
+              <span className="whitespace-nowrap">View as</span>
+              <div className="inline-flex rounded-md border border-border/60 bg-muted/30 p-0.5">
+                {salesChartOptions.map((option) => (
+                  <button
+                    key={option.value}
+                    type="button"
+                    onClick={() => setSalesChartType(option.value)}
+                    className={cn(
+                      "rounded-sm px-2.5 py-1 text-xs font-semibold transition-colors",
+                      salesChartType === option.value
+                        ? "bg-primary text-primary-foreground shadow-sm"
+                        : "text-muted-foreground hover:text-foreground"
+                    )}
+                    aria-pressed={salesChartType === option.value}
+                  >
+                    {option.label}
+                  </button>
+                ))}
+              </div>
+            </div>
           }
         >
           {hasSalesTrendData ? (
