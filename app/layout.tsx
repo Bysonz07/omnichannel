@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import "@/app/globals.css";
 import { AppSidebar } from "@/components/AppSidebar";
+import { ChatAssistant } from "@/components/ChatAssistant";
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
@@ -53,6 +54,7 @@ export default function RootLayout({
             </footer>
           </div>
         </div>
+        <ChatAssistant />
       </body>
     </html>
   );
