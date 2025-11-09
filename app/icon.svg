@@ -1,0 +1,29 @@
+<svg width="512" height="512" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="iconBg" cx="50%" cy="30%" r="80%">
+      <stop offset="0%" stop-color="#fef6ff"/>
+      <stop offset="55%" stop-color="#c0ceff"/>
+      <stop offset="100%" stop-color="#4e4dbb"/>
+    </radialGradient>
+    <linearGradient id="iconPink" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffb4e6"/>
+      <stop offset="100%" stop-color="#ff6fb3"/>
+    </linearGradient>
+    <linearGradient id="iconGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1f8d81"/>
+      <stop offset="100%" stop-color="#2fd081"/>
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="28" fill="url(#iconBg)"/>
+  <g transform="translate(34 18)">
+    <path
+      d="M29 0c12.5 17 19 33.5 19 48.5C48 79 30 92 30 92S12 79 11 48.5C10.5 33.5 16.5 17 29 0z"
+      fill="url(#iconPink)"/>
+    <path
+      d="M30 0c11 19 17 35.5 17 49.5 0 21-10 36.5-17 42.5V0z"
+      fill="url(#iconGreen)"/>
+    <path d="M31 17c-6 13-10 20-15 27" stroke="#ffe0ef" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M41 32c3 3.5 6 7 9 11" stroke="#a2ffd4" stroke-width="2" stroke-linecap="round"/>
+    <path d="M24 60l6 10 6-10" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

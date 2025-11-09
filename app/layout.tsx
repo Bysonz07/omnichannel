@@ -1,40 +1,33 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import localFont from "next/font/local";
-
 import "@/app/globals.css";
 import { AppSidebar } from "@/components/AppSidebar";
+import { ChatAssistant } from "@/components/ChatAssistant";
 import { Button } from "@/components/ui/button";
 
-const inter = localFont({
-  src: "../public/fonts/Inter-roman.var.woff2",
-  weight: "100 900",
-  display: "swap"
-});
-
 export const metadata: Metadata = {
-  title: "StockVision Pro",
+  title: "Aomori Vision",
   description:
-    "Upload stock and sales data, visualize trends, and monitor low inventory with StockVision Pro."
+    "Aomori Vision blends sakura-inspired design with live stock & sales insights to keep your operations serene."
 };
 
 export default function RootLayout({
   children
 }: Readonly<{
   children: React.ReactNode;
-}>) {
+  }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} min-h-screen bg-background text-foreground`}>
+      <body className="min-h-screen bg-background text-foreground">
         <div className="flex min-h-screen">
           <AppSidebar />
           <div className="flex min-h-screen flex-1 flex-col bg-muted/20">
             <header className="border-b border-border bg-card/80 backdrop-blur supports-[backdrop-filter]:bg-card/60">
               <div className="mx-auto flex w-full max-w-6xl flex-col gap-3 px-6 py-6">
                 <div>
-                  <h1 className="text-3xl font-semibold tracking-tight">StockVision Pro</h1>
+                  <h1 className="text-3xl font-semibold tracking-tight text-accent">Aomori Vision</h1>
                   <p className="text-muted-foreground">
-                    Transform raw stock &amp; sales files into actionable insights.
+                    Sakura-inspired clarity for every stock and sales decision.
                   </p>
                 </div>
                 <div className="flex gap-2 md:hidden">
@@ -55,12 +48,13 @@ export default function RootLayout({
             </main>
             <footer className="border-t border-border bg-card/80 py-4 text-sm text-muted-foreground">
               <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6">
-                <span>&copy; {new Date().getFullYear()} StockVision Pro</span>
-                <span>Built with Next.js, Tailwind CSS &amp; shadcn/ui</span>
+                <span>&copy; {new Date().getFullYear()} Aomori Vision</span>
+                <span>Crafted with Next.js, Tailwind CSS &amp; shadcn/ui</span>
               </div>
             </footer>
           </div>
         </div>
+        <ChatAssistant />
       </body>
     </html>
   );

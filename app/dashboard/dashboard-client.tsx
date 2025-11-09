@@ -82,11 +82,14 @@ export function DashboardClient({ summary }: DashboardClientProps) {
       {
         key: "remaining",
         header: "Remaining",
-        render: (row: LinkedProduct) => (
-          <span className={cn(row.remaining < 0 ? "font-semibold text-destructive" : "")}>
-            {row.remaining.toLocaleString()}
-          </span>
-        )
+        render: (row: LinkedProduct) => {
+          const remaining = ensureNumber(row.remaining);
+          return (
+            <span className={cn(remaining < 0 ? "font-semibold text-destructive" : "")}>
+              {remaining.toLocaleString()}
+            </span>
+          );
+        }
       }
     ],
     []
@@ -217,13 +220,13 @@ export function DashboardClient({ summary }: DashboardClientProps) {
         <KPIcard
           title="Sales quantity (month)"
           value={summary.totals.monthlySalesQty.toLocaleString()}
-          helper="Sum of all sold units this calendar month."
+          helper="Captured stock minus units sold this month."
           trend={summary.totals.monthlySalesQty > 0 ? "up" : "neutral"}
         />
         <KPIcard
           title="Sales value (month)"
           value={`IDR ${summary.totals.monthlySalesValue.toLocaleString()}`}
-          helper="Gross sales value this month."
+          helper="Sum of the sales dataset's total column."
           trend={summary.totals.monthlySalesValue > 0 ? "up" : "neutral"}
         />
         <KPIcard
@@ -365,7 +368,7 @@ export function DashboardClient({ summary }: DashboardClientProps) {
                       {product.nama_produk || product.kode_produk}
                     </p>
                     <p className="text-xs text-muted-foreground">
-                      Remaining {product.remaining.toLocaleString()} units
+                      {`Remaining ${ensureNumber(product.remaining).toLocaleString()} units`}
                     </p>
                   </div>
                   <Badge variant="default" className="bg-destructive text-destructive-foreground">
@@ -380,12 +383,20 @@ export function DashboardClient({ summary }: DashboardClientProps) {
         <Card className="border-border/70 bg-card/90 lg:col-span-1">
           <CardHeader>
             <CardTitle>Dataset snapshot</CardTitle>
-            <CardDescription>Overview of linked stock & sales data.</CardDescription>
+            <CardDescription>Linked stock & sales overview.</CardDescription>
           </CardHeader>
-          <CardContent className="space-y-2 text-sm text-muted-foreground">
-            <p>Total products tracked: {summary.products.length.toLocaleString()}</p>
-            <p>Warehouses: {summary.warehouseDistribution.length}</p>
-            <p>Categories: {summary.stockByCategory.length}</p>
+          <CardContent>
+            <div className="rounded-lg border border-border/60 bg-muted/20">
+              <div className="grid grid-cols-2 border-b border-border/60 px-3 py-2 text-xs uppercase tracking-wide text-muted-foreground">
+                <span>Metric</span>
+                <span className="text-right">Value</span>
+              </div>
+              <div className="divide-y divide-border/60 text-sm">
+                <SnapshotRow label="Products tracked" value={summary.products.length} />
+                <SnapshotRow label="Warehouses" value={summary.warehouseDistribution.length} />
+                <SnapshotRow label="Categories" value={summary.stockByCategory.length} />
+              </div>
+            </div>
           </CardContent>
         </Card>
       </section>
@@ -414,6 +425,28 @@ export function DashboardClient({ summary }: DashboardClientProps) {
 
 function formatCurrency(value: number) {
   return `IDR ${value.toLocaleString()}`;
+}
+
+function SnapshotRow({ label, value }: { label: string; value: number }) {
+  return (
+    <div className="grid grid-cols-2 px-3 py-2">
+      <span className="text-muted-foreground">{label}</span>
+      <span className="text-right font-medium text-foreground">{value.toLocaleString()}</span>
+    </div>
+  );
+}
+
+function ensureNumber(value: number | string | null | undefined, fallback = 0) {
+  if (typeof value === "number" && Number.isFinite(value)) {
+    return value;
+  }
+  if (typeof value === "string") {
+    const parsed = Number(value.replace(/[^0-9.-]+/g, ""));
+    if (Number.isFinite(parsed)) {
+      return parsed;
+    }
+  }
+  return fallback;
 }
 
 function formatDateLabel(value: string | number) {

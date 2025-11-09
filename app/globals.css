@@ -1,69 +1,72 @@
+@import url("https://fonts.googleapis.com/css2?family=TikTok+Sans:wght@400;500;600;700&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: 210 90% 98%;
-  --foreground: 210 19% 12%;
+  --font-sans: "TikTok Sans", "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --background: 330 100% 98%;
+  --foreground: 332 26% 14%;
 
-  --muted: 210 14% 89%;
-  --muted-foreground: 210 12% 40%;
+  --muted: 333 48% 95%;
+  --muted-foreground: 330 20% 35%;
 
   --popover: 0 0% 100%;
-  --popover-foreground: 210 19% 12%;
+  --popover-foreground: 332 26% 14%;
 
   --card: 0 0% 100%;
-  --card-foreground: 210 19% 12%;
+  --card-foreground: 332 26% 14%;
 
-  --border: 210 26% 90%;
-  --input: 210 26% 90%;
+  --border: 330 44% 90%;
+  --input: 330 44% 90%;
 
-  --primary: 222 88% 55%;
-  --primary-foreground: 210 33% 97%;
+  --primary: 332 74% 62%;
+  --primary-foreground: 0 0% 100%;
 
-  --secondary: 213 34% 93%;
-  --secondary-foreground: 222 47% 23%;
+  --secondary: 285 42% 90%;
+  --secondary-foreground: 285 28% 30%;
 
-  --accent: 209 100% 60%;
-  --accent-foreground: 210 17% 15%;
+  --accent: 255 70% 72%;
+  --accent-foreground: 258 33% 16%;
 
-  --destructive: 0 84% 60%;
-  --destructive-foreground: 0 0% 98%;
+  --destructive: 356 70% 55%;
+  --destructive-foreground: 0 0% 100%;
 
-  --ring: 221 83% 53%;
+  --ring: 332 74% 62%;
 
   --radius: 0.75rem;
 }
 
 .dark {
-  --background: 222 47% 10%;
-  --foreground: 213 31% 91%;
+  --background: 315 32% 10%;
+  --foreground: 330 40% 96%;
 
-  --muted: 217 33% 17%;
-  --muted-foreground: 215 20% 65%;
+  --muted: 315 25% 20%;
+  --muted-foreground: 330 20% 75%;
 
-  --popover: 222 47% 12%;
-  --popover-foreground: 213 31% 91%;
+  --popover: 315 28% 12%;
+  --popover-foreground: 330 40% 96%;
 
-  --card: 222 47% 12%;
-  --card-foreground: 213 31% 91%;
+  --card: 315 28% 12%;
+  --card-foreground: 330 40% 96%;
 
-  --border: 217 34% 18%;
-  --input: 217 34% 18%;
+  --border: 315 23% 25%;
+  --input: 315 23% 25%;
 
-  --primary: 221 83% 53%;
-  --primary-foreground: 210 33% 97%;
+  --primary: 330 70% 70%;
+  --primary-foreground: 315 30% 12%;
 
-  --secondary: 217 33% 17%;
-  --secondary-foreground: 213 31% 91%;
+  --secondary: 275 45% 35%;
+  --secondary-foreground: 330 40% 92%;
 
-  --accent: 215 20% 65%;
-  --accent-foreground: 222 47% 12%;
+  --accent: 255 65% 60%;
+  --accent-foreground: 315 38% 12%;
 
-  --destructive: 0 72% 51%;
-  --destructive-foreground: 210 33% 97%;
+  --destructive: 0 70% 60%;
+  --destructive-foreground: 315 35% 98%;
 
-  --ring: 221 83% 53%;
+  --ring: 330 70% 70%;
 }
 
 @layer base {
@@ -72,6 +75,7 @@
   }
 
   body {
+    font-family: var(--font-sans);
     @apply bg-background text-foreground antialiased;
   }
 }

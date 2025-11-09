@@ -171,17 +171,21 @@ export function getDashboardSummary(): DashboardSummary {
   const totalStockQty = linkedArray.reduce((acc, product) => acc + Math.max(product.qty, 0), 0);
 
   const now = new Date();
-  const salesThisMonth = linkedArray.flatMap((p) => p.transactions);
-  const filteredMonthlySales = salesThisMonth.filter((sale) => {
+  const monthlyReferenceDate = getReferenceMonth(sales) ?? now;
+  const filteredMonthlySales = sales.filter((sale) => {
     const saleDate = parseSaleDate(sale.tanggal);
-    return saleDate ? isSameMonth(saleDate, now) : false;
+    return saleDate ? isSameMonth(saleDate, monthlyReferenceDate) : false;
   });
 
-  const monthlySalesQty = filteredMonthlySales.reduce((acc, sale) => {
+  const monthlySoldQty = filteredMonthlySales.reduce((acc, sale) => {
     const qty = toNumeric(sale.qty) ?? 0;
     return acc + Math.max(qty, 0);
   }, 0);
-  const monthlySalesValue = filteredMonthlySales.reduce((acc, sale) => acc + getSaleValue(sale), 0);
+  const monthlySalesQty = Math.max(totalStockQty - monthlySoldQty, 0);
+  const monthlySalesValue = sales.reduce((acc, sale) => {
+    const total = toNumeric(sale.total) ?? 0;
+    return acc + Math.max(total, 0);
+  }, 0);
 
   const bestSellers = [...linkedArray]
     .sort((a, b) => b.totalSales - a.totalSales)
@@ -342,4 +346,18 @@ function getSaleValue(sale: SalesRecord) {
   }
 
   return 0;
+}
+
+function getReferenceMonth(sales: SalesRecord[]) {
+  let latest: Date | null = null;
+  sales.forEach((sale) => {
+    const saleDate = parseSaleDate(sale.tanggal);
+    if (!saleDate) {
+      return;
+    }
+    if (!latest || saleDate.getTime() > latest.getTime()) {
+      latest = saleDate;
+    }
+  });
+  return latest;
 }

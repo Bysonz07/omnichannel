@@ -29,3 +29,19 @@ The importer will try to infer common column names.
 
 Notes:
 - This is a small starter app; extend with server-side APIs and DB for production.
+
+## Sakura assistant (Gemini RAG)
+
+The floating Sakura chat assistant uses Google Gemini with context from your uploaded stock and sales datasets.
+
+1. Create a `.env.local` file (or set environment variables in your hosting provider) with:
+
+   ```bash
+   GEMINI_API_KEY=your-google-gemini-key
+   # Optional (defaults to gemini-1.5-flash)
+   GEMINI_MODEL=gemini-1.5-flash
+   ```
+
+2. Restart `npm run dev` after changing env variables so Next.js can pick them up.
+
+The assistant calls `/api/chat`, which retrieves data via `lib/data-store.ts`, assembles a lightweight RAG prompt, and streams the answer back to the overlay UI.
