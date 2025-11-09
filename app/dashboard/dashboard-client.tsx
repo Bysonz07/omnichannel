@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useMemo, useState } from "react";
+import { Fragment, useEffect, useMemo, useState } from "react";
 import type { ReactElement } from "react";
 import {
   Bar,
@@ -17,6 +17,7 @@ import {
   XAxis,
   YAxis
 } from "recharts";
+import { ChevronLeft, ChevronRight, Search } from "lucide-react";
 
 import { ChartCard } from "@/components/ChartCard";
 import { DataTable } from "@/components/DataTable";
@@ -24,6 +25,8 @@ import { KPIcard } from "@/components/KPIcard";
 import { SummaryDrawer } from "@/components/SummaryDrawer";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import type { DashboardSummary, LinkedProduct } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
@@ -49,11 +52,15 @@ const salesChartOptions: { value: SalesChartType; label: string }[] = [
   { value: "pie", label: "Pie" },
   { value: "histogram", label: "Hist" }
 ];
+const PAGE_SIZE_OPTIONS = [10, 25, 50];
 
 export function DashboardClient({ summary }: DashboardClientProps) {
   const [selectedProduct, setSelectedProduct] = useState<LinkedProduct | null>(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [salesChartType, setSalesChartType] = useState<SalesChartType>("line");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(PAGE_SIZE_OPTIONS[0]);
 
   const productColumns = useMemo(
     () => [
@@ -94,6 +101,26 @@ export function DashboardClient({ summary }: DashboardClientProps) {
     ],
     []
   );
+
+  const normalizedSearch = searchTerm.trim().toLowerCase();
+  const filteredProducts = useMemo(() => {
+    if (!normalizedSearch) {
+      return summary.products;
+    }
+    return summary.products.filter((product) =>
+      product.kode_produk.toLowerCase().includes(normalizedSearch)
+    );
+  }, [summary.products, normalizedSearch]);
+
+  const totalPages = Math.max(1, Math.ceil(filteredProducts.length / pageSize));
+  const paginatedProducts = useMemo(() => {
+    const start = (page - 1) * pageSize;
+    return filteredProducts.slice(start, start + pageSize);
+  }, [filteredProducts, page, pageSize]);
+
+  useEffect(() => {
+    setPage(1);
+  }, [normalizedSearch, pageSize]);
 
   const bestSellerList = summary.bestSellers.slice(0, 5);
   const lowStockList = summary.lowStock.slice(0, 5);
@@ -409,15 +436,80 @@ export function DashboardClient({ summary }: DashboardClientProps) {
             insights.
           </p>
         </div>
-        <DataTable
-          columns={productColumns}
-          data={summary.products}
-          caption="Complete snapshot of stock & sales data."
-          onRowClick={(row) => {
-            setSelectedProduct(row);
-            setDrawerOpen(true);
-          }}
-        />
+        <div className="space-y-4 rounded-2xl border border-border/70 bg-card/70 p-4">
+          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+            <div className="relative w-full max-w-sm">
+              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+              <Input
+                className="pl-9"
+                placeholder="Search kode_produk..."
+                value={searchTerm}
+                onChange={(event) => setSearchTerm(event.target.value)}
+              />
+            </div>
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <span>Rows per page</span>
+              <select
+                className="rounded-md border border-border/70 bg-background px-3 py-1 text-sm font-medium"
+                value={pageSize}
+                onChange={(event) => setPageSize(Number(event.target.value))}
+              >
+                {PAGE_SIZE_OPTIONS.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          <DataTable
+            columns={productColumns}
+            data={paginatedProducts}
+            caption="Complete snapshot of stock & sales data."
+            dense
+            onRowClick={(row) => {
+              setSelectedProduct(row);
+              setDrawerOpen(true);
+            }}
+          />
+
+          <div className="flex flex-col gap-3 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between">
+            <span>
+              Showing{" "}
+              {filteredProducts.length === 0
+                ? "0"
+                : `${(page - 1) * pageSize + 1}-${Math.min(
+                    page * pageSize,
+                    filteredProducts.length
+                  )}`}{" "}
+              of {filteredProducts.length} products
+            </span>
+            <div className="flex items-center gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+                disabled={page === 1}
+              >
+                <ChevronLeft className="mr-1 h-4 w-4" />
+                Prev
+              </Button>
+              <span className="text-xs font-semibold text-foreground">
+                Page {Math.min(page, totalPages)} / {totalPages}
+              </span>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
+                disabled={page === totalPages || filteredProducts.length === 0}
+              >
+                Next
+                <ChevronRight className="ml-1 h-4 w-4" />
+              </Button>
+            </div>
+          </div>
+        </div>
       </section>
     </div>
   );

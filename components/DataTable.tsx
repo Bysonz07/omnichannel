@@ -56,14 +56,20 @@ export function DataTable<T>({
                 onClick={onRowClick ? () => onRowClick(row) : undefined}
               >
                 {columns.map((column) => {
-                  const hasCustomRenderer = typeof column.render === "function";
-                  const content = hasCustomRenderer
-                    ? column.render(row)
-                    : (row as Record<string, unknown>)[column.key as string];
+                  const renderer = column.render;
+                  if (typeof renderer === "function") {
+                    const content = renderer(row);
+                    return (
+                      <TableCell key={String(column.key)} className={column.className}>
+                        {renderCustomContent(content)}
+                      </TableCell>
+                    );
+                  }
 
+                  const value = (row as Record<string, unknown>)[column.key as string];
                   return (
                     <TableCell key={String(column.key)} className={column.className}>
-                      {hasCustomRenderer ? renderCustomContent(content) : renderPrimitiveContent(content)}
+                      {renderPrimitiveContent(value)}
                     </TableCell>
                   );
                 })}
