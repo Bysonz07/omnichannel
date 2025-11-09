@@ -56,20 +56,14 @@ export function DataTable<T>({
                 onClick={onRowClick ? () => onRowClick(row) : undefined}
               >
                 {columns.map((column) => {
-                  const content =
-                    column.render !== undefined
-                      ? column.render(row)
-                      : (row as Record<string, unknown>)[column.key as string];
+                  const hasCustomRenderer = typeof column.render === "function";
+                  const content = hasCustomRenderer
+                    ? column.render(row)
+                    : (row as Record<string, unknown>)[column.key as string];
 
                   return (
                     <TableCell key={String(column.key)} className={column.className}>
-                      {content === null || content === undefined || content === "" ? (
-                        <span className="text-muted-foreground/70">—</span>
-                      ) : typeof content === "number" ? (
-                        content.toLocaleString()
-                      ) : (
-                        String(content)
-                      )}
+                      {hasCustomRenderer ? renderCustomContent(content) : renderPrimitiveContent(content)}
                     </TableCell>
                   );
                 })}
@@ -80,4 +74,21 @@ export function DataTable<T>({
       </Table>
     </ScrollArea>
   );
+}
+
+function renderCustomContent(content: React.ReactNode) {
+  if (content === null || content === undefined) {
+    return <span className="text-muted-foreground/70">-</span>;
+  }
+  return content;
+}
+
+function renderPrimitiveContent(value: unknown) {
+  if (value === null || value === undefined || value === "") {
+    return <span className="text-muted-foreground/70">-</span>;
+  }
+  if (typeof value === "number") {
+    return value.toLocaleString();
+  }
+  return String(value);
 }

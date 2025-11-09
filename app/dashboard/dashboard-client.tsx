@@ -82,11 +82,14 @@ export function DashboardClient({ summary }: DashboardClientProps) {
       {
         key: "remaining",
         header: "Remaining",
-        render: (row: LinkedProduct) => (
-          <span className={cn(row.remaining < 0 ? "font-semibold text-destructive" : "")}>
-            {row.remaining.toLocaleString()}
-          </span>
-        )
+        render: (row: LinkedProduct) => {
+          const remaining = ensureNumber(row.remaining);
+          return (
+            <span className={cn(remaining < 0 ? "font-semibold text-destructive" : "")}>
+              {remaining.toLocaleString()}
+            </span>
+          );
+        }
       }
     ],
     []
@@ -365,7 +368,7 @@ export function DashboardClient({ summary }: DashboardClientProps) {
                       {product.nama_produk || product.kode_produk}
                     </p>
                     <p className="text-xs text-muted-foreground">
-                      Remaining {product.remaining.toLocaleString()} units
+                      {`Remaining ${ensureNumber(product.remaining).toLocaleString()} units`}
                     </p>
                   </div>
                   <Badge variant="default" className="bg-destructive text-destructive-foreground">
@@ -414,6 +417,19 @@ export function DashboardClient({ summary }: DashboardClientProps) {
 
 function formatCurrency(value: number) {
   return `IDR ${value.toLocaleString()}`;
+}
+
+function ensureNumber(value: number | string | null | undefined, fallback = 0) {
+  if (typeof value === "number" && Number.isFinite(value)) {
+    return value;
+  }
+  if (typeof value === "string") {
+    const parsed = Number(value.replace(/[^0-9.-]+/g, ""));
+    if (Number.isFinite(parsed)) {
+      return parsed;
+    }
+  }
+  return fallback;
 }
 
 function formatDateLabel(value: string | number) {

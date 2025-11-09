@@ -190,13 +190,14 @@ function normalizeStock(rows: Record<string, unknown>[]): StockRecord[] {
       const satuan = findByAliases(row, ["satuan", "unit"]);
       const gudang = findByAliases(row, ["gudang", "warehouse"]);
       const qty = findByAliases(row, ["qty", "jumlah", "quantity", "stock", "saldo"]);
+      const parsedQty = coerceNumber(qty);
       return {
         kode_produk: String(kode),
         nama_produk: String(nama ?? kode),
         kategori: String(kategori ?? "UNASSIGNED"),
         satuan: String(satuan ?? "-"),
         gudang: String(gudang ?? "-"),
-        qty: typeof qty === "number" ? qty : Number(qty) || 0
+        qty: parsedQty ?? 100
       };
     })
     .filter((record): record is StockRecord => Boolean(record));
@@ -231,11 +232,10 @@ function normalizeSales(rows: Record<string, unknown>[]): SalesRecord[] {
         faktur: String(fakturId),
         kode_produk: String(kode),
         nama_barang: String(nama ?? kode),
-        qty: typeof qty === "number" ? qty : Number(qty) || 0,
-        harga_satuan:
-          typeof hargaSatuan === "number" ? hargaSatuan : Number(hargaSatuan) || 0,
-        jumlah: typeof jumlah === "number" ? jumlah : Number(jumlah) || 0,
-        total: typeof total === "number" ? total : Number(total) || 0
+        qty: coerceNumber(qty) ?? 0,
+        harga_satuan: coerceNumber(hargaSatuan) ?? 0,
+        jumlah: coerceNumber(jumlah) ?? 0,
+        total: coerceNumber(total) ?? 0
       };
     })
     .filter((record): record is SalesRecord => Boolean(record));
@@ -252,4 +252,19 @@ function findByAliases(source: Record<string, unknown>, aliases: string[]) {
     }
   }
   return undefined;
+}
+
+function coerceNumber(value: unknown) {
+  if (typeof value === "number" && Number.isFinite(value)) {
+    return value;
+  }
+  if (typeof value === "string") {
+    const normalized = value.replace(/[^0-9.-]+/g, "");
+    if (!normalized) {
+      return null;
+    }
+    const parsed = Number(normalized);
+    return Number.isFinite(parsed) ? parsed : null;
+  }
+  return null;
 }
