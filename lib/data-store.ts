@@ -171,10 +171,10 @@ export function getDashboardSummary(): DashboardSummary {
   const totalStockQty = linkedArray.reduce((acc, product) => acc + Math.max(product.qty, 0), 0);
 
   const now = new Date();
-  const salesThisMonth = linkedArray.flatMap((p) => p.transactions);
-  const filteredMonthlySales = salesThisMonth.filter((sale) => {
+  const monthlyReferenceDate = getReferenceMonth(sales) ?? now;
+  const filteredMonthlySales = sales.filter((sale) => {
     const saleDate = parseSaleDate(sale.tanggal);
-    return saleDate ? isSameMonth(saleDate, now) : false;
+    return saleDate ? isSameMonth(saleDate, monthlyReferenceDate) : false;
   });
 
   const monthlySoldQty = filteredMonthlySales.reduce((acc, sale) => {
@@ -346,4 +346,18 @@ function getSaleValue(sale: SalesRecord) {
   }
 
   return 0;
+}
+
+function getReferenceMonth(sales: SalesRecord[]) {
+  let latest: Date | null = null;
+  sales.forEach((sale) => {
+    const saleDate = parseSaleDate(sale.tanggal);
+    if (!saleDate) {
+      return;
+    }
+    if (!latest || saleDate.getTime() > latest.getTime()) {
+      latest = saleDate;
+    }
+  });
+  return latest;
 }
