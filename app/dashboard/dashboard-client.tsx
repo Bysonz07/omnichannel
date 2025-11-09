@@ -383,12 +383,20 @@ export function DashboardClient({ summary }: DashboardClientProps) {
         <Card className="border-border/70 bg-card/90 lg:col-span-1">
           <CardHeader>
             <CardTitle>Dataset snapshot</CardTitle>
-            <CardDescription>Overview of linked stock & sales data.</CardDescription>
+            <CardDescription>Linked stock & sales overview.</CardDescription>
           </CardHeader>
-          <CardContent className="space-y-2 text-sm text-muted-foreground">
-            <p>Total products tracked: {summary.products.length.toLocaleString()}</p>
-            <p>Warehouses: {summary.warehouseDistribution.length}</p>
-            <p>Categories: {summary.stockByCategory.length}</p>
+          <CardContent>
+            <div className="rounded-lg border border-border/60 bg-muted/20">
+              <div className="grid grid-cols-2 border-b border-border/60 px-3 py-2 text-xs uppercase tracking-wide text-muted-foreground">
+                <span>Metric</span>
+                <span className="text-right">Value</span>
+              </div>
+              <div className="divide-y divide-border/60 text-sm">
+                <SnapshotRow label="Products tracked" value={summary.products.length} />
+                <SnapshotRow label="Warehouses" value={summary.warehouseDistribution.length} />
+                <SnapshotRow label="Categories" value={summary.stockByCategory.length} />
+              </div>
+            </div>
           </CardContent>
         </Card>
       </section>
@@ -417,6 +425,15 @@ export function DashboardClient({ summary }: DashboardClientProps) {
 
 function formatCurrency(value: number) {
   return `IDR ${value.toLocaleString()}`;
+}
+
+function SnapshotRow({ label, value }: { label: string; value: number }) {
+  return (
+    <div className="grid grid-cols-2 px-3 py-2">
+      <span className="text-muted-foreground">{label}</span>
+      <span className="text-right font-medium text-foreground">{value.toLocaleString()}</span>
+    </div>
+  );
 }
 
 function ensureNumber(value: number | string | null | undefined, fallback = 0) {
