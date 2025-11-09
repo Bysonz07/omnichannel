@@ -29,12 +29,12 @@ export default function HomePage() {
       <section className="rounded-3xl border border-border bg-card/80 p-10 shadow-lg">
         <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
           <div className="max-w-xl space-y-4">
-            <h2 className="text-4xl font-semibold tracking-tight">
-              Gain the full story behind your stock—without leaving the spreadsheet.
+            <h2 className="text-4xl font-semibold tracking-tight text-primary">
+              Aomori Vision keeps your stock story in bloom--no complex BI required.
             </h2>
             <p className="text-lg text-muted-foreground">
-              StockVision Pro ingests your stock counts and sales orders, then delivers live summaries,
-              trend visualizations, and proactive low-stock alerts so you can act before it is too late.
+              Upload raw ledgers and Aomori Vision nourishes them into calming dashboards, seasonal KPIs,
+              and proactive alerts so every decision feels as intentional as a tea ceremony.
             </p>
             <div className="flex flex-wrap gap-3">
               <Button asChild>

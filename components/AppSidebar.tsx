@@ -1,9 +1,11 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { BarChart3, Home, UploadCloud } from "lucide-react";
 
+import AomoriLogo from "@/../public/aomori-logo.svg";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -30,13 +32,20 @@ export function AppSidebar() {
 
   return (
     <aside className="hidden border-r border-border/60 bg-card/70 pb-6 pt-8 md:flex md:w-64 md:flex-col">
-      <div className="flex items-center gap-2 px-6 pb-8">
-        <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10 text-sm font-semibold text-primary">
-          SV
-        </span>
+      <div className="flex items-center gap-3 px-6 pb-8">
+        <div className="rounded-2xl bg-gradient-to-br from-primary/20 via-accent/30 to-secondary/40 p-2">
+          <Image
+            src={AomoriLogo}
+            width={36}
+            height={36}
+            alt="Aomori Vision emblem"
+            className="drop-shadow-sm"
+            priority
+          />
+        </div>
         <div>
-          <p className="text-sm font-semibold tracking-tight text-muted-foreground">StockVision Pro</p>
-          <span className="text-xs text-muted-foreground/70">Inventory intelligence</span>
+          <p className="text-sm font-semibold tracking-tight text-foreground">Aomori Vision</p>
+          <span className="text-xs text-muted-foreground/80">Sakura inventory intelligence</span>
         </div>
       </div>
       <nav className="flex flex-1 flex-col gap-1 px-3">
