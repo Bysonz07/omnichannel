@@ -177,11 +177,15 @@ export function getDashboardSummary(): DashboardSummary {
     return saleDate ? isSameMonth(saleDate, now) : false;
   });
 
-  const monthlySalesQty = filteredMonthlySales.reduce((acc, sale) => {
+  const monthlySoldQty = filteredMonthlySales.reduce((acc, sale) => {
     const qty = toNumeric(sale.qty) ?? 0;
     return acc + Math.max(qty, 0);
   }, 0);
-  const monthlySalesValue = filteredMonthlySales.reduce((acc, sale) => acc + getSaleValue(sale), 0);
+  const monthlySalesQty = Math.max(totalStockQty - monthlySoldQty, 0);
+  const monthlySalesValue = sales.reduce((acc, sale) => {
+    const total = toNumeric(sale.total) ?? 0;
+    return acc + Math.max(total, 0);
+  }, 0);
 
   const bestSellers = [...linkedArray]
     .sort((a, b) => b.totalSales - a.totalSales)

@@ -220,13 +220,13 @@ export function DashboardClient({ summary }: DashboardClientProps) {
         <KPIcard
           title="Sales quantity (month)"
           value={summary.totals.monthlySalesQty.toLocaleString()}
-          helper="Sum of all sold units this calendar month."
+          helper="Captured stock minus units sold this month."
           trend={summary.totals.monthlySalesQty > 0 ? "up" : "neutral"}
         />
         <KPIcard
           title="Sales value (month)"
           value={`IDR ${summary.totals.monthlySalesValue.toLocaleString()}`}
-          helper="Gross sales value this month."
+          helper="Sum of the sales dataset's total column."
           trend={summary.totals.monthlySalesValue > 0 ? "up" : "neutral"}
         />
         <KPIcard
