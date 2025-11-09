@@ -1,3 +1,5 @@
+export type DocumentType = "sales" | "stock";
+
 export type StockRecord = {
   kode_produk: string;
   nama_produk: string;
@@ -18,6 +20,16 @@ export type SalesRecord = {
   jumlah: number;
   total: number;
 };
+
+export type PDFConversionResult =
+  | {
+      type: "sales";
+      rows: SalesRecord[];
+    }
+  | {
+      type: "stock";
+      rows: StockRecord[];
+    };
 
 export type LinkedProduct = StockRecord & {
   totalSales: number;

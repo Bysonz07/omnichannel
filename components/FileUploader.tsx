@@ -9,12 +9,14 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
+import type { DocumentType } from "@/lib/types";
 
 export type ParsedDataset = {
   fileName: string;
   size: number;
   columns: string[];
   rows: Record<string, any>[];
+  documentType?: DocumentType;
 };
 
 type FileUploaderProps = {
@@ -30,16 +32,19 @@ const SUPPORTED_TYPES = [
   "text/csv",
   "application/vnd.ms-excel",
   "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-  "text/plain"
+  "text/plain",
+  "application/pdf"
 ];
 
 export function FileUploader({ title, description, accept, onParsed, helper }: FileUploaderProps) {
   const [error, setError] = useState<string>();
   const [isLoading, setIsLoading] = useState(false);
   const [dragActive, setDragActive] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [lastDataset, setLastDataset] = useState<ParsedDataset>();
   const inputRef = useRef<HTMLInputElement | null>(null);
 
-  const acceptedTypes = useMemo(() => accept ?? ".xlsx,.xls,.csv,.json", [accept]);
+  const acceptedTypes = useMemo(() => accept ?? ".xlsx,.xls,.csv,.json,.pdf", [accept]);
 
   const handleFiles = useCallback(
     async (fileList: FileList | null) => {
@@ -49,11 +54,32 @@ export function FileUploader({ title, description, accept, onParsed, helper }: F
       const file = fileList[0];
       setIsLoading(true);
       setError(undefined);
+      setProgress(5);
+      setLastDataset(undefined);
       try {
-        if (![...SUPPORTED_TYPES].some((type) => file.type.includes(type)) && !acceptedTypes.includes(file.name.split(".").pop() ?? "")) {
-          throw new Error("Unsupported file type. Please upload CSV, Excel, or JSON.");
+        if (
+          !SUPPORTED_TYPES.some((type) => file.type.includes(type)) &&
+          !acceptedTypes.includes(file.name.split(".").pop() ?? "")
+        ) {
+          throw new Error("Unsupported file type. Please upload CSV, Excel, JSON, or PDF.");
         }
-        const rows = await parseFile(file);
+
+        const extension = file.name.split(".").pop()?.toLowerCase();
+        const isPdf = file.type === "application/pdf" || extension === "pdf";
+
+        let rows: Record<string, any>[] = [];
+        let documentType: DocumentType | undefined;
+
+        if (isPdf) {
+          const pdfResult = await convertPdfToJson(file, setProgress);
+          rows = pdfResult.rows;
+          documentType = pdfResult.documentType;
+        } else {
+          setProgress(35);
+          rows = await parseStructuredFile(file);
+          setProgress(85);
+        }
+
         if (!rows.length) {
           throw new Error("File parsed successfully but no rows were detected.");
         }
@@ -62,15 +88,20 @@ export function FileUploader({ title, description, accept, onParsed, helper }: F
           return acc;
         }, new Set<string>());
         const columns = Array.from(columnSet);
-        onParsed({
+        const dataset: ParsedDataset = {
           fileName: file.name,
           size: file.size,
           rows,
-          columns
-        });
+          columns,
+          documentType
+        };
+        setLastDataset(dataset);
+        onParsed(dataset);
+        setProgress(100);
       } catch (err) {
         const message = err instanceof Error ? err.message : "Unable to parse this file.";
         setError(message);
+        setProgress(0);
       } finally {
         setIsLoading(false);
       }
@@ -133,7 +164,7 @@ export function FileUploader({ title, description, accept, onParsed, helper }: F
                 browse
               </Button>
             </p>
-            <p className="text-xs text-muted-foreground">Supports Excel (.xlsx), CSV, and JSON files.</p>
+            <p className="text-xs text-muted-foreground">Supports Excel (.xlsx), CSV, JSON, and PDF reports.</p>
             {helper ? <p className="mt-2 text-xs text-muted-foreground">{helper}</p> : null}
           </div>
           <Input
@@ -147,13 +178,103 @@ export function FileUploader({ title, description, accept, onParsed, helper }: F
             }}
           />
         </div>
+        {progress > 0 ? (
+          <div className="mt-4 space-y-2">
+            <div className="flex items-center justify-between text-xs text-muted-foreground">
+              <span>{isLoading && progress < 100 ? "Processing file..." : "Processing complete"}</span>
+              <span>{progress}%</span>
+            </div>
+            <div className="h-2 w-full rounded-full bg-muted">
+              <div
+                className="h-full rounded-full bg-primary transition-all"
+                style={{ width: `${Math.min(progress, 100)}%` }}
+              />
+            </div>
+          </div>
+        ) : null}
+        {lastDataset ? (
+          <div className="mt-4 rounded-lg border border-border/60 bg-card/70 p-4 text-sm">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div>
+                <p className="font-semibold">{lastDataset.fileName}</p>
+                <p className="text-xs text-muted-foreground">
+                  {formatBytes(lastDataset.size)} · {lastDataset.rows.length} rows parsed
+                  {lastDataset.documentType ? ` · ${lastDataset.documentType.toUpperCase()} dataset` : ""}
+                </p>
+              </div>
+              <Button size="sm" variant="outline" onClick={() => downloadDataset(lastDataset)}>
+                Download JSON
+              </Button>
+            </div>
+          </div>
+        ) : null}
         {error ? <p className="mt-4 text-sm text-destructive">{error}</p> : null}
       </CardContent>
     </Card>
   );
 }
 
-async function parseFile(file: File): Promise<Record<string, any>[]> {
+async function convertPdfToJson(
+  file: File,
+  onProgress: (value: number) => void
+): Promise<{ rows: Record<string, any>[]; documentType?: DocumentType }> {
+  const formData = new FormData();
+  formData.append("file", file);
+  onProgress(30);
+  const response = await fetch("/api/convert", {
+    method: "POST",
+    body: formData
+  });
+  onProgress(70);
+  let payload: any = null;
+  try {
+    payload = await response.json();
+  } catch {
+    payload = null;
+  }
+  if (!response.ok) {
+    const message = payload?.message ?? "Unable to convert PDF file.";
+    throw new Error(message);
+  }
+  onProgress(95);
+  const rows = Array.isArray(payload?.rows)
+    ? (payload.rows as Record<string, any>[])
+    : [];
+  return {
+    rows,
+    documentType: payload?.type as DocumentType | undefined
+  };
+}
+
+function downloadDataset(dataset: ParsedDataset) {
+  const blob = new Blob([JSON.stringify(dataset.rows, null, 2)], {
+    type: "application/json"
+  });
+  const url = URL.createObjectURL(blob);
+  const anchor = document.createElement("a");
+  const baseName =
+    dataset.documentType ?? dataset.fileName.replace(/\.[^.]+$/, "") ?? "dataset";
+  anchor.href = url;
+  anchor.download = `${baseName}_data.json`;
+  anchor.click();
+  URL.revokeObjectURL(url);
+}
+
+function formatBytes(size?: number) {
+  if (typeof size !== "number" || Number.isNaN(size)) {
+    return "-";
+  }
+  if (size === 0) {
+    return "0 B";
+  }
+  const units = ["B", "KB", "MB", "GB", "TB"];
+  const exponent = Math.min(Math.floor(Math.log(size) / Math.log(1024)), units.length - 1);
+  const value = size / 1024 ** exponent;
+  const digits = exponent === 0 || value >= 10 ? 0 : 1;
+  return `${value.toFixed(digits)} ${units[exponent]}`;
+}
+
+async function parseStructuredFile(file: File): Promise<Record<string, any>[]> {
   const extension = file.name.split(".").pop()?.toLowerCase();
   if (extension === "json") {
     const text = await file.text();
