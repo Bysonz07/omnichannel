@@ -1,16 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import localFont from "next/font/local";
-
 import "@/app/globals.css";
 import { AppSidebar } from "@/components/AppSidebar";
 import { Button } from "@/components/ui/button";
-
-const inter = localFont({
-  src: "../public/fonts/Inter-roman.var.woff2",
-  weight: "100 900",
-  display: "swap"
-});
 
 export const metadata: Metadata = {
   title: "StockVision Pro",
@@ -22,10 +14,10 @@ export default function RootLayout({
   children
 }: Readonly<{
   children: React.ReactNode;
-}>) {
+  }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} min-h-screen bg-background text-foreground`}>
+      <body className="min-h-screen bg-background text-foreground">
         <div className="flex min-h-screen">
           <AppSidebar />
           <div className="flex min-h-screen flex-1 flex-col bg-muted/20">
