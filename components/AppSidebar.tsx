@@ -3,29 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BarChart3, Home, UploadCloud } from "lucide-react";
 
 import AomoriLogo from "@/../public/aomori-logo.svg";
 import { Button } from "@/components/ui/button";
+import { primaryNavigation } from "@/lib/navigation";
 import { cn } from "@/lib/utils";
-
-const navItems = [
-  {
-    href: "/",
-    label: "Overview",
-    icon: Home
-  },
-  {
-    href: "/upload",
-    label: "Upload Data",
-    icon: UploadCloud
-  },
-  {
-    href: "/dashboard",
-    label: "Dashboard",
-    icon: BarChart3
-  }
-];
 
 export function AppSidebar() {
   const pathname = usePathname();
@@ -51,7 +33,7 @@ export function AppSidebar() {
       <nav className="flex flex-1 flex-col gap-1 px-3">
         <p className="px-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground/80">Navigation</p>
         <div className="mt-2 flex flex-col gap-1">
-          {navItems.map((item) => {
+          {primaryNavigation.map((item) => {
             const Icon = item.icon;
             const isActive =
               item.href === "/"
