@@ -6,7 +6,7 @@ export const runtime = "nodejs";
 
 export async function GET() {
   return NextResponse.json({
-    data: getSales()
+    data: await getSales()
   });
 }
 
@@ -14,7 +14,7 @@ export async function POST(request: Request) {
   try {
     const payload = await request.json();
     const data = validateSalesPayload(payload);
-    setSales(data);
+    await setSales(data);
     return NextResponse.json(
       {
         message: "Sales dataset updated",
