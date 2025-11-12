@@ -7,6 +7,6 @@ export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export default async function DashboardPage() {
-  const summary = getDashboardSummary();
+  const summary = await getDashboardSummary();
   return <DashboardClient summary={summary} />;
 }

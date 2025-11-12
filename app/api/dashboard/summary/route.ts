@@ -5,6 +5,6 @@ import { getDashboardSummary } from "@/lib/data-store";
 export const runtime = "nodejs";
 
 export async function GET() {
-  const summary = getDashboardSummary();
+  const summary = await getDashboardSummary();
   return NextResponse.json(summary);
 }

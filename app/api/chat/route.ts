@@ -27,8 +27,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ message: "Prompt is required." }, { status: 400 });
     }
 
-    const stock = getStock();
-    const sales = getSales();
+    const [stock, sales] = await Promise.all([getStock(), getSales()]);
 
     const prompt = buildPrompt({
       question: message,
@@ -92,8 +91,8 @@ function buildPrompt({
 }: {
   question: string;
   history: ChatHistory;
-  stock: ReturnType<typeof getStock>;
-  sales: ReturnType<typeof getSales>;
+  stock: Awaited<ReturnType<typeof getStock>>;
+  sales: Awaited<ReturnType<typeof getSales>>;
 }) {
   const stockContext = stock
     .slice(0, 50)

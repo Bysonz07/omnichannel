@@ -36,6 +36,12 @@ const DATA_DIR =
 const STOCK_FILE = path.join(DATA_DIR, "stock.json");
 const SALES_FILE = path.join(DATA_DIR, "sales.json");
 
+const KV_URL = process.env.KV_REST_API_URL;
+const KV_TOKEN = process.env.KV_REST_API_TOKEN;
+const KV_NAMESPACE = process.env.KV_REST_API_NAMESPACE ?? "";
+const KV_PREFIX = process.env.SV_KV_PREFIX ?? "sv";
+const KV_ENABLED = Boolean(KV_URL && KV_TOKEN);
+
 type MemoryStore = {
   stock: StockRecord[];
   sales: SalesRecord[];
@@ -46,6 +52,65 @@ const memoryStore: MemoryStore = {
   stock: clone(defaultStock),
   sales: clone(defaultSales)
 };
+const fsPromises = fs.promises;
+
+function buildKvKey(key: keyof MemoryStore) {
+  const prefix = KV_NAMESPACE ? `${KV_NAMESPACE}:${KV_PREFIX}` : KV_PREFIX;
+  return `${prefix}:${key}`;
+}
+
+async function kvGetValue<K extends keyof MemoryStore>(key: K): Promise<MemoryStore[K] | null> {
+  if (!KV_ENABLED || !KV_URL || !KV_TOKEN) {
+    return null;
+  }
+
+  try {
+    const response = await fetch(`${KV_URL}/get/${encodeURIComponent(buildKvKey(key))}`, {
+      headers: {
+        Authorization: `Bearer ${KV_TOKEN}`
+      },
+      cache: "no-store"
+    });
+
+    if (!response.ok) {
+      return null;
+    }
+
+    const payload = (await response.json()) as { result: string | null | undefined };
+    if (typeof payload.result !== "string") {
+      return null;
+    }
+
+    const parsed = JSON.parse(payload.result) as MemoryStore[K];
+    memoryStore[key] = parsed;
+    return clone(parsed);
+  } catch (error) {
+    console.error(`KV get failed for ${String(key)}`, error);
+    return null;
+  }
+}
+
+async function kvSetValue<K extends keyof MemoryStore>(key: K, value: MemoryStore[K]) {
+  if (!KV_ENABLED || !KV_URL || !KV_TOKEN) {
+    return false;
+  }
+
+  try {
+    const response = await fetch(`${KV_URL}/set/${encodeURIComponent(buildKvKey(key))}`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${KV_TOKEN}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(value)
+    });
+
+    return response.ok;
+  } catch (error) {
+    console.error(`KV set failed for ${String(key)}`, error);
+    return false;
+  }
+}
 
 function clone<T>(value: T): T {
   if (typeof structuredClone === "function") {
@@ -54,50 +119,62 @@ function clone<T>(value: T): T {
   return JSON.parse(JSON.stringify(value)) as T;
 }
 
-function readJsonFile<K extends keyof MemoryStore>(key: K, file: string): MemoryStore[K] {
+async function readStore<K extends keyof MemoryStore>(key: K, file: string): Promise<MemoryStore[K]> {
+  const kvValue = await kvGetValue(key);
+  if (kvValue) {
+    return kvValue;
+  }
+
   if (canUseDisk && fs.existsSync(file)) {
     try {
-      const raw = fs.readFileSync(file, "utf-8");
+      const raw = await fsPromises.readFile(file, "utf-8");
       const parsed = JSON.parse(raw) as MemoryStore[K];
       memoryStore[key] = parsed;
       return clone(parsed);
-    } catch {
+    } catch (error) {
+      console.error(`Failed to read ${file}`, error);
       canUseDisk = false;
     }
   }
+
   return clone(memoryStore[key]);
 }
 
-function writeJsonFile<K extends keyof MemoryStore>(key: K, file: string, data: MemoryStore[K]) {
-  memoryStore[key] = clone(data);
-  if (!canUseDisk) {
-    return;
-  }
+async function writeStore<K extends keyof MemoryStore>(key: K, file: string, data: MemoryStore[K]) {
+  const snapshot = clone(data);
+  memoryStore[key] = snapshot;
 
-  try {
-    if (!fs.existsSync(DATA_DIR)) {
-      fs.mkdirSync(DATA_DIR, { recursive: true });
+  const kvResult = await kvSetValue(key, snapshot);
+
+  if (canUseDisk) {
+    try {
+      if (!fs.existsSync(DATA_DIR)) {
+        await fsPromises.mkdir(DATA_DIR, { recursive: true });
+      }
+      await fsPromises.writeFile(file, JSON.stringify(snapshot, null, 2), "utf-8");
+    } catch (error) {
+      console.error(`Failed to write ${file}`, error);
+      canUseDisk = false;
     }
-    fs.writeFileSync(file, JSON.stringify(data, null, 2), "utf-8");
-  } catch {
-    canUseDisk = false;
   }
+
+  return kvResult;
 }
 
-export function getStock(): StockRecord[] {
-  return readJsonFile("stock", STOCK_FILE);
+export async function getStock(): Promise<StockRecord[]> {
+  return readStore("stock", STOCK_FILE);
 }
 
-export function getSales(): SalesRecord[] {
-  return readJsonFile("sales", SALES_FILE);
+export async function getSales(): Promise<SalesRecord[]> {
+  return readStore("sales", SALES_FILE);
 }
 
-export function setStock(data: StockRecord[]) {
-  writeJsonFile("stock", STOCK_FILE, data);
+export async function setStock(data: StockRecord[]) {
+  await writeStore("stock", STOCK_FILE, data);
 }
 
-export function setSales(data: SalesRecord[]) {
-  writeJsonFile("sales", SALES_FILE, data);
+export async function setSales(data: SalesRecord[]) {
+  await writeStore("sales", SALES_FILE, data);
 }
 
 export function validateStockPayload(payload: unknown) {
@@ -108,9 +185,8 @@ export function validateSalesPayload(payload: unknown) {
   return z.array(salesSchema).parse(payload);
 }
 
-export function getDashboardSummary(): DashboardSummary {
-  const stock = getStock();
-  const sales = getSales();
+export async function getDashboardSummary(): Promise<DashboardSummary> {
+  const [stock, sales] = await Promise.all([getStock(), getSales()]);
 
   const stockByCode = new Map<string, StockRecord>();
   stock.forEach((record) => {
