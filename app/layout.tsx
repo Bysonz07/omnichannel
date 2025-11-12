@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import "@/app/globals.css";
 import { AppSidebar } from "@/components/AppSidebar";
 import { ChatAssistant } from "@/components/ChatAssistant";
-import { Button } from "@/components/ui/button";
+import { MobileNav } from "@/components/MobileNav";
 
 export const metadata: Metadata = {
   title: "Aomori Vision",
@@ -23,33 +22,27 @@ export default function RootLayout({
           <AppSidebar />
           <div className="flex min-h-screen flex-1 flex-col bg-muted/20">
             <header className="border-b border-border bg-card/80 backdrop-blur supports-[backdrop-filter]:bg-card/60">
-              <div className="mx-auto flex w-full max-w-6xl flex-col gap-3 px-6 py-6">
-                <div>
-                  <h1 className="text-3xl font-semibold tracking-tight text-accent">Aomori Vision</h1>
-                  <p className="text-muted-foreground">
-                    Sakura-inspired clarity for every stock and sales decision.
-                  </p>
-                </div>
-                <div className="flex gap-2 md:hidden">
-                  <Button asChild variant="outline" size="sm">
-                    <Link href="/">Home</Link>
-                  </Button>
-                  <Button asChild variant="outline" size="sm">
-                    <Link href="/upload">Upload</Link>
-                  </Button>
-                  <Button asChild variant="outline" size="sm">
-                    <Link href="/dashboard">Dashboard</Link>
-                  </Button>
+              <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-4 py-4 sm:px-6 sm:py-6">
+                <div className="flex flex-col gap-2">
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <h1 className="text-2xl font-semibold tracking-tight text-accent md:text-3xl">Aomori Vision</h1>
+                      <p className="text-sm text-muted-foreground sm:text-base">
+                        Sakura-inspired clarity for every stock and sales decision.
+                      </p>
+                    </div>
+                    <MobileNav />
+                  </div>
                 </div>
               </div>
             </header>
             <main className="flex-1 overflow-y-auto">
-              <div className="mx-auto w-full max-w-6xl px-6 py-10">{children}</div>
+              <div className="mx-auto w-full max-w-6xl px-4 py-6 sm:px-6 sm:py-10">{children}</div>
             </main>
             <footer className="border-t border-border bg-card/80 py-4 text-sm text-muted-foreground">
-              <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6">
-                <span>&copy; {new Date().getFullYear()} Aomori Vision</span>
-                <span>Crafted with Next.js, Tailwind CSS &amp; shadcn/ui</span>
+              <div className="mx-auto flex w-full max-w-6xl flex-col items-center gap-2 px-4 text-center sm:flex-row sm:justify-between sm:text-left">
+                <span className="text-xs sm:text-sm">&copy; {new Date().getFullYear()} Aomori Vision</span>
+                <span className="text-xs sm:text-sm">Crafted with Next.js, Tailwind CSS &amp; shadcn/ui</span>
               </div>
             </footer>
           </div>
